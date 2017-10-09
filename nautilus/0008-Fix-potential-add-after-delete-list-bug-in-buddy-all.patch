@@ -1,0 +1,36 @@
+From 58c6b8ae2c5249b87a65453640bbb8be3e93f3f6 Mon Sep 17 00:00:00 2001
+From: Peter Dinda <pdinda@northwestern.edu>
+Date: Thu, 20 Jul 2017 16:12:22 -0500
+Subject: [PATCH 08/10] Fix potential add-after-delete list bug in buddy
+ allocator
+
+This is unlikely to be an actual bug, but good defensive programming
+---
+ src/nautilus/mm/buddy.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/nautilus/mm/buddy.c b/src/nautilus/mm/buddy.c
+index 910c82e..05f287c 100644
+--- a/src/nautilus/mm/buddy.c
++++ b/src/nautilus/mm/buddy.c
+@@ -306,7 +306,7 @@ buddy_alloc (struct buddy_mempool *mp, ulong_t order)
+         }
+ 
+         block = list_entry(list->next, struct block, link);
+-        list_del(&block->link);
++        list_del_init(&block->link);
+         mark_allocated(mp, block);
+ 
+ 	BUDDY_DEBUG("Found block %p at order %lu\n",block,j);
+@@ -389,7 +389,7 @@ buddy_free(
+ 	BUDDY_DEBUG("buddy merge\n");
+ 
+         /* OK, we're good to go... buddy merge! */
+-        list_del(&buddy->link);
++        list_del_init(&buddy->link);
+         if (buddy < block) {
+             block = buddy;
+ 	}
+-- 
+1.9.1
+

@@ -1,0 +1,9 @@
+AC_PREREQ(2.59)
+AC_INIT([newlib], [NEWLIB_VERSION])
+AC_CONFIG_SRCDIR([crt0.c])
+AC_CONFIG_AUX_DIR(../../../..)
+AC_PREFIX_DEFAULT(/home/parallels/newlib)
+NEWLIB_CONFIGURE(../../..)
+AC_CONFIG_FILES([Makefile])
+AC_PROG_CC([gcc])
+AC_OUTPUT

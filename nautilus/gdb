@@ -1,0 +1,1 @@
+make isoimage && qemu-system-x86_64 -vga std -smp 1 -m 2048 -chardev socket,host=localhost,port=5000,id=g,server -device isa-serial,chardev=g -chardev stdio,id=d -device isa-serial,chardev=d  -cdrom nautilus.iso

@@ -1,0 +1,13 @@
+diff a/src/arch/x64/init.c b/src/arch/x64/init.c	(rejected hunks)
+@@ -270,11 +274,6 @@ init (unsigned long mbd,
+     nk_block_dev_init();
+     nk_net_dev_init();
+ 
+-    nk_dev_init();
+-    nk_char_dev_init();
+-    nk_block_dev_init();
+-    nk_net_dev_init();
+-
+     nk_vc_print(NAUT_WELCOME);
+ 
+     

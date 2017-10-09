@@ -1,0 +1,7 @@
+This directory contains a port of the newlib C std library to the nautilus aerokernel. Currently, newlib is not fully integrated into nautilus as a menuconfig option. Instead, this directory contains two separate subdirectories - newlib and nautilus. Newlib contains the newlib source that has been modified to port to nautilus, as well as the build and install trees and the complete newlib static library. Nautilus contains the nautilus source code, along with some small changes to allow for compatiblity with newlib.
+
+Three scripts have been provided at the root level of this directory. In order to run these scripts, this directory must be located at $HOME. Before building for the first time, run config.sh to configure newlib, and then run build.sh to build both newlib and nautilus. After this, build.sh should suffice. Run clean.sh as necessary to clean the newlib build directory, but make sure to run config.sh after doing so. In order to boot nautilus, navigate to the nautilus subdirectory and follow the instructions in the README.
+
+Two other documents have been provided for future development. Missing.md describes the various syscalls that benchmarks and other programs depend on and are not defined currently in newlib. Changes.md describes the various modifications that have been made to newlib and nautilus to facilitate their integration.
+
+In order to build this directory, you must modify the line that begins 'NAUT_CONFIG_NEWLIB_DIR=' in nautilus/.config to specify where this directory is on your machine

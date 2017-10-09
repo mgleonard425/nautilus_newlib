@@ -1,0 +1,6459 @@
+cscope 15 $HOME/nautilus/src/arch/x64               0000041438
+	@early_mem.c
+
+23 
+	~<«utûus/«utûus.h
+>
+
+24 
+	~<«utûus/mm.h
+>
+
+25 
+	~<«utûus/mb_utûs.h
+>
+
+26 
+	~<«utûus/ma¸os.h
+>
+
+27 
+	~<«utûus/mu…iboŸ2.h
+>
+
+29 * 
+mem_ªgi⁄_ty≥s
+[6];
+
+31 #i‚de‡
+NAUT_CONFIG_DEBUG_BOOTMEM
+
+
+32 #unde‡
+DEBUG_PRINT
+
+
+33 
+	#DEBUG_PRINT
+(
+fmt
+, 
+¨gs
+...)
+
+	)
+
+36 
+	#BMM_DEBUG
+(
+fmt
+, 
+¨gs
+...Ë
+	`DEBUG_PRINT
+("BOOTMEM: " fmt, ##¨gs)
+
+	)
+
+37 
+	#BMM_PRINT
+(
+fmt
+, 
+¨gs
+...Ë
+	`¥ötk
+("BOOTMEM: " fmt, ##¨gs)
+
+	)
+
+38 
+	#BMM_WARN
+(
+fmt
+, 
+¨gs
+...Ë
+	`WARN_PRINT
+("BOOTMEM: " fmt, ##¨gs)
+
+	)
+
+42 
+	$¨ch_ª£rve_boŸ_ªgi⁄s
+ (
+mbd
+)
+
+44 #ifde‡
+NAUT_CONFIG_REAL_MODE_INTERFACE
+
+
+45 
+	`INFO_PRINT
+("Reserving Long->Real Interface Segment (%p, size %lu)\n",
+
+46 
+NAUT_CONFIG_REAL_MODE_INTERFACE_SEGMENT
+*16UL, 65536UL);
+
+47 
+	`mm_boŸ_ª£rve_mem
+((
+addr_t
+)(
+NAUT_CONFIG_REAL_MODE_INTERFACE_SEGMENT
+*16UL),
+
+48 (
+ul⁄g_t
+)65536);
+
+50 
+	}
+}
+
+54 
+	$¨ch_dëe˘_mem_m≠
+ (
+mm≠_öfo_t
+ * 
+mm_öfo
+,
+
+55 
+mem_m≠_íåy_t
+ * 
+mem‹y_m≠
+,
+
+56 
+mbd
+)
+
+58 
+mu…iboŸ_èg
+ * 
+èg
+;
+
+59 
+uöt32_t
+ 
+n
+ = 0;
+
+61 i‡(
+mbd
+ & 7) {
+
+62 
+	`∑nic
+("ERROR: Unaligned multiboot info struct\n");
+
+65 
+èg
+ = (
+mu…iboŸ_èg
+*)(
+mbd
++8);
+
+66 
+èg
+->
+ty≥
+ !
+MULTIBOOT_TAG_TYPE_MMAP
+) {
+
+67 
+èg
+ = (
+mu…iboŸ_èg
+*)((
+mu…iboŸ_uöt8_t
+*Èag + (—ag->
+size
++7)&~7));
+
+70 i‡(
+èg
+->
+ty≥
+ !
+MULTIBOOT_TAG_TYPE_MMAP
+) {
+
+71 
+	`∑nic
+("ERROR:Ço mmapÅag found\n");
+
+74 
+mu…iboŸ_mem‹y_m≠_t
+ * 
+mm≠
+;
+
+76 
+mm≠
+=((
+mu…iboŸ_èg_mm≠
+*)
+èg
+)->
+íåõs
+;
+
+77 (
+mu…iboŸ_uöt8_t
+*)
+mm≠
+ < (mu…iboŸ_uöt8_t*)
+èg
+ +Åag->
+size
+;
+
+78 
+mm≠
+ = (
+mu…iboŸ_mem‹y_m≠_t
+*)((
+ul⁄g_t
+)mmap +
+
+79 ((
+mu…iboŸ_èg_mm≠
+*)
+èg
+)->
+íåy_size
+)) {
+
+82 i‡(
+n
+ > 
+MAX_MMAP_ENTRIES
+) {
+
+83 
+	`∑nic
+("Reached memoryÑegionÜimit!\n");
+
+86 
+ul⁄g_t
+ 
+°¨t
+,
+íd
+;
+
+88 
+°¨t
+ = 
+	`round_up
+(
+mm≠
+->
+addr
+, 
+PAGE_SIZE_4KB
+);
+
+89 
+íd
+ = 
+	`round_down
+(
+mm≠
+->
+addr
+ + mm≠->
+Àn
+, 
+PAGE_SIZE_4KB
+);
+
+91 
+mem‹y_m≠
+[
+n
+].
+addr
+ = 
+°¨t
+;
+
+92 
+mem‹y_m≠
+[
+n
+].
+Àn
+ = 
+íd
+-
+°¨t
+;
+
+93 
+mem‹y_m≠
+[
+n
+].
+ty≥
+ = 
+mm≠
+->type;
+
+95 
+	`BMM_PRINT
+("Memory map[%u] - [%p - %p] <%s>\n",
+
+96 
+n
+,
+
+97 
+°¨t
+,
+
+98 
+íd
+,
+
+99 
+mem_ªgi⁄_ty≥s
+[
+mem‹y_m≠
+[
+n
+].
+ty≥
+]);
+
+101 i‡(
+mm≠
+->
+ty≥
+ =
+MULTIBOOT_MEMORY_AVAILABLE
+) {
+
+102 
+mm_öfo
+->
+ußbÀ_øm
+ +
+mm≠
+->
+Àn
+;
+
+105 i‡(
+íd
+ > (
+mm_öfo
+->
+œ°_p‚
+ << 
+PAGE_SHIFT
+)) {
+
+106 
+mm_öfo
+->
+œ°_p‚
+ = 
+íd
+ >> 
+PAGE_SHIFT
+;
+
+109 
+mm_öfo
+->
+tŸÆ_mem
+ +
+íd
+-
+°¨t
+;
+
+111 ++
+n
+;
+
+112 ++
+mm_öfo
+->
+num_ªgi⁄s
+;
+
+114 
+	}
+}
+
+	@init.c
+
+23 
+	#__NAUTILUS_MAIN__
+
+
+	)
+
+25 
+	~<«utûus/«utûus.h
+>
+
+26 
+	~<«utûus/∑gög.h
+>
+
+27 
+	~<«utûus/idt.h
+>
+
+28 
+	~<«utûus/•ölock.h
+>
+
+29 
+	~<«utûus/mb_utûs.h
+>
+
+30 
+	~<«utûus/˝u.h
+>
+
+31 
+	~<«utûus/m§.h
+>
+
+32 
+	~<«utûus/˝uid.h
+>
+
+33 
+	~<«utûus/smp.h
+>
+
+34 
+	~<«utûus/úq.h
+>
+
+35 
+	~<«utûus/thªad.h
+>
+
+36 
+	~<«utûus/timî.h
+>
+
+37 
+	~<«utûus/idÀ.h
+>
+
+38 
+	~<«utûus/≥r˝u.h
+>
+
+39 
+	~<«utûus/î∫o.h
+>
+
+40 
+	~<«utûus/Âu.h
+>
+
+41 
+	~<«utûus/øndom.h
+>
+
+42 
+	~<«utûus/a˝i.h
+>
+
+43 
+	~<«utûus/©omic.h
+>
+
+44 
+	~<«utûus/mm.h
+>
+
+45 
+	~<«utûus/libccom∑t.h
+>
+
+46 
+	~<«utûus/b¨rõr.h
+>
+
+47 
+	~<«utûus/vc.h
+>
+
+48 
+	~<«utûus/dev.h
+>
+
+49 
+	~<«utûus/ch¨dev.h
+>
+
+50 
+	~<«utûus/blkdev.h
+>
+
+51 
+	~<«utûus/√tdev.h
+>
+
+52 
+	~<«utûus/fs.h
+>
+
+53 
+	~<«utûus/shñl.h
+>
+
+55 
+	~<dev/≠ic.h
+>
+
+56 
+	~<dev/pci.h
+>
+
+57 
+	~<dev/h≥t.h
+>
+
+58 
+	~<dev/iﬂpic.h
+>
+
+59 
+	~<dev/i8254.h
+>
+
+60 
+	~<dev/ps2.h
+>
+
+61 
+	~<dev/£rül.h
+>
+
+62 
+	~<dev/vga.h
+>
+
+63 #ifde‡
+NAUT_CONFIG_VIRTIO_PCI
+
+
+64 
+	~<dev/vútio_pci.h
+>
+
+66 #ifde‡
+NAUT_CONFIG_RAMDISK
+
+
+67 
+	~<dev/ømdisk.h
+>
+
+69 #ifde‡
+NAUT_CONFIG_ATA
+
+
+70 
+	~<dev/©a.h
+>
+
+72 #ifde‡
+NAUT_CONFIG_EXT2_FILESYSTEM_DRIVER
+
+
+73 
+	~<fs/ext2/ext2.h
+>
+
+75 #ifde‡
+NAUT_CONFIG_FAT32_FILESYSTEM_DRIVER
+
+
+76 
+	~<fs/Át32/Át32.h
+>
+
+79 #ifde‡
+NAUT_CONFIG_NDPC_RT
+
+
+80 
+	~"ndpc_¥ìm±_thªads.h
+"
+
+83 #ifde‡
+NAUT_CONFIG_PALACIOS
+
+
+84 
+	~<«utûus/vmm.h
+>
+
+87 #ifde‡
+NAUT_CONFIG_REAL_MODE_INTERFACE
+
+
+88 
+	~<«utûus/ªÆmode.h
+>
+
+91 #ifde‡
+NAUT_CONFIG_VESA
+
+
+92 
+	~<dev/veß.h
+>
+
+95 
+•ölock_t
+ 
+¥ötk_lock
+;
+
+99 
+	#QUANTUM_IN_NS
+ (1000000000ULL/
+NAUT_CONFIG_HZ
+)
+
+	)
+
+101 
+nk_sched_c⁄fig
+ 
+	gsched_cfg
+ = {
+
+102 .
+utû_limô
+ = 
+NAUT_CONFIG_UTILIZATION_LIMIT
+*10000ULL,
+
+103 .
+	g•‹adic_ª£rv©i⁄
+ = 
+NAUT_CONFIG_SPORADIC_RESERVATION
+*10000ULL,
+
+104 .
+	g≠îiodic_ª£rv©i⁄
+ = 
+NAUT_CONFIG_APERIODIC_RESERVATION
+*10000ULL,
+
+105 .
+	g≠îiodic_qu™tum
+ = 
+QUANTUM_IN_NS
+,
+
+106 .
+	g≠îiodic_deÁu…_¥i‹ôy
+ = 
+QUANTUM_IN_NS
+,
+
+110 #ifde‡
+NAUT_CONFIG_NDPC_RT
+
+
+111 
+	$ndpc_π_ã°
+()
+
+113 
+	`¥ötk
+("Testing NDPC Libraryánd Executable\n");
+
+119 
+	`ã°_ndpc
+();
+
+121 
+thªad_id_t
+ 
+tid
+;
+
+123 
+	`ndpc_öô_¥ìm±_thªads
+();
+
+125 
+tid
+ = 
+	`ndpc_f‹k_¥ìm±_thªad
+();
+
+127 i‡(!
+tid
+) {
+
+128 
+	`¥ötk
+("Error in initial fork\n");
+
+133 i‡(
+tid
+!=
+	`ndpc_my_¥ìm±_thªad
+()) {
+
+134 
+	`¥ötk
+("Parent!\n");
+
+135 
+	`ndpc_joö_¥ìm±_thªad
+(
+tid
+);
+
+136 
+	`¥ötk
+("Joinend with foo\n");
+
+138 
+	`¥ötk
+("Child!\n");
+
+142 
+	`ndpc_deöô_¥ìm±_thªads
+();
+
+147 
+	}
+}
+
+152 
+	$sysöfo_öô
+ (
+sys_öfo
+ * 
+sys
+)
+
+154 
+sys
+->
+c‹e_b¨rõr
+ = (
+nk_b¨rõr_t
+*)
+	`mÆloc
+((nk_barrier_t));
+
+155 i‡(!
+sys
+->
+c‹e_b¨rõr
+) {
+
+156 
+	`ERROR_PRINT
+("CouldÇotállocate core barrier\n");
+
+159 
+	`mem£t
+(
+sys
+->
+c‹e_b¨rõr
+, 0, (
+nk_b¨rõr_t
+));
+
+161 i‡(
+	`nk_b¨rõr_öô
+(
+sys
+->
+c‹e_b¨rõr
+, sys->
+num_˝us
+) != 0) {
+
+162 
+	`ERROR_PRINT
+("CouldÇot create core barrier\n");
+
+163 
+out_îr
+;
+
+168 
+out_îr
+:
+
+169 
+	`‰ì
+(
+sys
+->
+c‹e_b¨rõr
+);
+
+170  -
+EINVAL
+;
+
+171 
+	}
+}
+
+175 
+	$ru¡ime_öô
+ ()
+
+178 #ifde‡
+NAUT_CONFIG_LEGION_RT
+
+
+179 #ifde‡
+NAUT_CONFIG_PROFILE
+
+
+180 
+	`nk_ö°rumít_°¨t
+();
+
+181 
+	`nk_ö°rumít_ˇlibøã
+(
+INSTR_CAL_LOOPS
+);
+
+184 
+	`run_Àgi⁄_ã°s
+();
+
+185 
+	`run_Àgi⁄_ã°s
+();
+
+187 #ifde‡
+NAUT_CONFIG_PROFILE
+
+
+188 
+	`nk_ö°rumít_íd
+();
+
+189 
+	`nk_ö°rumít_quîy
+();
+
+194 #ifde‡
+NAUT_CONFIG_NDPC_RT
+
+
+195 
+	`ndpc_π_ã°
+();
+
+198 #ifde‡
+NAUT_CONFIG_NESL_RT
+
+
+199 
+	`√¶_«utûus_maö
+();
+
+201 
+	}
+}
+
+205 #ifde‡
+NAUT_CONFIG_PALACIOS_MGMT_VM
+
+
+206 *
+	gmgmt_vm
+;
+
+209 
+	$œunch_vmm_ívú⁄mít
+()
+
+211 #ifde‡
+NAUT_CONFIG_PALACIOS
+
+
+212 
+	`nk_vmm_öô
+("none");
+
+214 #ifde‡
+NAUT_CONFIG_PALACIOS_MGMT_VM
+
+
+215 
+gue°_°¨t
+;
+
+216 
+mgmt_vm
+ = 
+	`nk_vmm_°¨t_vm
+("m™agemít-vm",&
+gue°_°¨t
+,0xffffffff);
+
+217 i‡(!
+mgmt_vm
+) {
+
+218 
+	`ERROR_PRINT
+("FailedÅo startÉmbedded management VM\n");
+
+223 
+	`¥ötk
+("VMÉnvironmentÜaunched\n");
+
+226 
+	}
+}
+
+230 
+	#NAUT_WELCOME
+ \
+
+239 "+===============================================+ \n\n"
+
+	)
+
+242 
+«ut_öfo
+ * 
+smp_≠_°ack_swôch
+(
+uöt64_t
+, uint64_t, naut_info*);
+
+245 
+	$öô
+ (
+mbd
+,
+
+246 
+magic
+)
+
+248 
+«ut_öfo
+ * 
+«ut
+ = &
+«utûus_öfo
+;
+
+250 
+	`mem£t
+(
+«ut
+, 0, (
+«ut_öfo
+));
+
+252 
+	`vga_óæy_öô
+();
+
+254 
+	`•ölock_öô
+(&
+¥ötk_lock
+);
+
+256 
+	`£tup_idt
+();
+
+258 
+	`nk_öt_öô
+(&(
+«ut
+->
+sys
+));
+
+261 
+	`£rül_óæy_öô
+();
+
+263 
+	`nk_dev_öô
+();
+
+264 
+	`nk_ch¨_dev_öô
+();
+
+265 
+	`nk_block_dev_öô
+();
+
+266 
+	`nk_√t_dev_öô
+();
+
+268 
+	`nk_vc_¥öt
+(
+NAUT_WELCOME
+);
+
+270 
+	`dëe˘_˝u
+();
+
+273 
+	`mm_boŸ_öô
+(
+mbd
+);
+
+275 
+«ut
+->
+sys
+.
+mb_öfo
+ = 
+	`mu…iboŸ_∑r£
+(
+mbd
+, 
+magic
+);
+
+276 i‡(!
+«ut
+->
+sys
+.
+mb_öfo
+) {
+
+277 
+	`ERROR_PRINT
+("ProblemÖarsing multiboot header\n");
+
+280 
+	`nk_a˝i_öô
+();
+
+283 
+	`smp_óæy_öô
+(
+«ut
+);
+
+287 
+	`nk_numa_öô
+();
+
+290 
+	`nk_∑gög_öô
+(&(
+«ut
+->
+sys
+.
+mem
+), 
+mbd
+);
+
+293 
+	`nk_kmem_öô
+();
+
+296 
+	`m§_wrôe
+(
+MSR_GS_BASE
+, (
+uöt64_t
+)
+«ut
+->
+sys
+.
+˝us
+[0]);
+
+300 
+	`mm_boŸ_kmem_öô
+();
+
+302 
+	`dißbÀ_8259pic
+();
+
+304 
+	`i8254_öô
+(
+«ut
+);
+
+308 
+	`sysöfo_öô
+(&(
+«ut
+->
+sys
+));
+
+310 
+	`iﬂpic_öô
+(&(
+«ut
+->
+sys
+));
+
+312 
+	`nk_timî_öô
+();
+
+314 
+	`≠ic_öô
+(
+«ut
+->
+sys
+.
+˝us
+[0]);
+
+316 
+	`Âu_öô
+(
+«ut
+);
+
+318 
+	`nk_ønd_öô
+(
+«ut
+->
+sys
+.
+˝us
+[0]);
+
+320 
+	`ps2_öô
+(
+«ut
+);
+
+322 
+	`pci_öô
+(
+«ut
+);
+
+324 
+	`nk_sched_öô
+(&
+sched_cfg
+);
+
+327 
+«ut
+ = 
+	`smp_≠_°ack_swôch
+(
+	`gë_cur_thªad
+()->
+r•
+, get_cur_thread()->rsp,Çaut);
+
+329 
+	`mm_boŸ_kmem_˛ónup
+();
+
+331 
+	`smp_£tup_xˇŒ_b•
+(
+«ut
+->
+sys
+.
+˝us
+[0]);
+
+333 
+	`nk_˝u_t›o_discovî
+(
+«ut
+->
+sys
+.
+˝us
+[0]);
+
+334 #ifde‡
+NAUT_CONFIG_HPET
+
+
+335 
+	`nk_h≥t_öô
+();
+
+338 #ifde‡
+NAUT_CONFIG_PROFILE
+
+
+339 
+	`nk_ö°rumít_öô
+();
+
+342 #ifde‡
+NAUT_CONFIG_REAL_MODE_INTERFACE
+
+
+343 
+	`nk_ªÆ_mode_öô
+();
+
+346 #ifde‡
+NAUT_CONFIG_VESA
+
+
+347 
+	`veß_öô
+();
+
+351 
+	`smp_brögup_≠s
+(
+«ut
+);
+
+353 
+	`nk_mwaô_öô
+();
+
+354 
+	`nk_mwaô_öô
+();
+
+356 #ifde‡
+NAUT_CONFIG_CXX_SUPPORT
+
+
+357 
+	`nk_cxx_öô
+();
+
+359 
+	`nk_cxx_öô
+();
+
+364 
+	`vga_öô
+();
+
+365 
+	`£rül_öô
+();
+
+369 
+	`°i
+();
+
+371 
+	`nk_vc_öô
+();
+
+374 #ifde‡
+NAUT_CONFIG_VIRTUAL_CONSOLE_CHARDEV_CONSOLE
+
+
+375 
+	`nk_vc_°¨t_ch¨dev_c⁄sﬁe
+(
+NAUT_CONFIG_VIRTUAL_CONSOLE_CHARDEV_CONSOLE_NAME
+);
+
+378 #ifde‡
+NAUT_CONFIG_RAMDISK
+
+
+379 
+	`nk_ømdisk_öô
+(
+«ut
+);
+
+382 #ifde‡
+NAUT_CONFIG_ATA
+
+
+383 
+	`nk_©a_öô
+(
+«ut
+);
+
+386 #ifde‡
+NAUT_CONFIG_VIRTIO_PCI
+
+
+387 
+	`vútio_pci_öô
+(
+«ut
+);
+
+390 
+	`nk_fs_öô
+();
+
+392 #ifde‡
+NAUT_CONFIG_EXT2_FILESYSTEM_DRIVER
+
+
+393 #ifde‡
+NAUT_CONFIG_RAMDISK_EMBED
+
+
+394 
+	`nk_fs_ext2_©èch
+("ramdisk0","rootfs", 1);
+
+398 #ifde‡
+NAUT_CONFIG_FAT32_FILESYSTEM_DRIVER
+
+
+399 #ifde‡
+NAUT_CONFIG_RAMDISK_EMBED
+
+
+400 
+	`nk_fs_Át32_©èch
+("ramdisk0","rootfs", 1);
+
+404 
+	`œunch_vmm_ívú⁄mít
+();
+
+406 
+	`nk_œunch_shñl
+("root-shell",0);
+
+408 
+	`ru¡ime_öô
+();
+
+410 
+	`¥ötk
+("Nautilus bootÅhread yielding (indefinitely)\n");
+
+413 
+	`idÀ
+(
+NULL
+, NULL);
+
+414 
+	}
+}
+
+	@main.c
+
+23 
+	#__NAUTILUS_MAIN__
+
+
+	)
+
+25 
+	~<¨ch/x64/öô.h
+>
+
+33 
+	$maö
+ (
+mbd
+,
+
+34 
+magic
+)
+
+37 
+	`öô
+(
+mbd
+, 
+magic
+);
+
+38 
+	}
+}
+
+	@mwait.c
+
+23 
+	~<«utûus/«utûus.h
+>
+
+24 
+	~<«utûus/˝uid.h
+>
+
+25 
+	~<«utûus/mwaô.h
+>
+
+28 
+	smwaô_öfo
+ {
+
+29 
+uöt8_t
+ 
+	mavaûabÀ
+;
+
+30 
+uöt16_t
+ 
+	mmö_löe_size
+;
+
+31 
+uöt16_t
+ 
+	mmax_löe_size
+;
+
+32 
+uöt8_t
+ 
+	möts_as_bªaks
+;
+
+33 
+uöt8_t
+ 
+	mc0_sub°©es
+;
+
+34 
+uöt8_t
+ 
+	mc1_sub°©es
+;
+
+35 
+uöt8_t
+ 
+	mc2_sub°©es
+;
+
+36 
+uöt8_t
+ 
+	mc3_sub°©es
+;
+
+37 
+uöt8_t
+ 
+	mc4_sub°©es
+;
+
+38 } 
+	gmwaô
+;
+
+41 
+uöt8_t
+
+
+42 
+	$has_mwaô
+ ()
+
+44 
+˝uid_ªt_t
+ 
+ªt
+;
+
+45 
+˝uid_ecx_Êags
+ 
+f
+;
+
+46 
+	`˝uid
+(
+CPUID_FEATURE_INFO
+, &
+ªt
+);
+
+47 
+f
+.
+vÆ
+ = 
+ªt
+.
+c
+;
+
+48  
+f
+.
+m⁄ô‹
+;
+
+49 
+	}
+}
+
+53 
+	$dump_mwaô_öfo
+ ()
+
+55 
+	`¥ötk
+("MONITOR/MWAIT Feature Set:\n");
+
+56 
+	`¥ötk
+("\tSmÆÀ° m⁄ô‹-löêsize: %uB\n", 
+mwaô
+.
+mö_löe_size
+);
+
+57 
+	`¥ötk
+("\tL¨ge° m⁄ô‹-löêsize: %uB\n", 
+mwaô
+.
+max_löe_size
+);
+
+58 
+	`¥ötk
+("\tSuµ‹t†öãºu±†a†bªakÉvíts: %s\n", 
+mwaô
+.
+öts_as_bªaks
+ ? "yes" : "no");
+
+59 
+	`¥ötk
+("\tNumbî o‡C0 sub C-°©e†suµ‹ãd: %u\n", 
+mwaô
+.
+c0_sub°©es
+);
+
+60 
+	`¥ötk
+("\tNumbî o‡C1 sub C-°©e†suµ‹ãd: %u\n", 
+mwaô
+.
+c1_sub°©es
+);
+
+61 
+	`¥ötk
+("\tNumbî o‡C2 sub C-°©e†suµ‹ãd: %u\n", 
+mwaô
+.
+c2_sub°©es
+);
+
+62 
+	`¥ötk
+("\tNumbî o‡C3 sub C-°©e†suµ‹ãd: %u\n", 
+mwaô
+.
+c3_sub°©es
+);
+
+63 
+	`¥ötk
+("\tNumbî o‡C4 sub C-°©e†suµ‹ãd: %u\n", 
+mwaô
+.
+c4_sub°©es
+);
+
+64 
+	}
+}
+
+68 
+	$nk_mwaô_öô
+ ()
+
+70 
+˝uid_ªt_t
+ 
+ªt
+;
+
+72 i‡(
+	`has_mwaô
+()) {
+
+73 
+	`¥ötk
+("Processor supports MONITOR/MWAITÉxtensions\n");
+
+74 
+mwaô
+.
+avaûabÀ
+ = 1;
+
+76 
+	`¥ötk
+("MWAITÇot supported\n");
+
+80 
+	`mem£t
+(&
+mwaô
+, 0, (mwait));
+
+82 
+	`˝uid
+(0x5, &
+ªt
+);
+
+84 
+mwaô
+.
+mö_löe_size
+ = 
+ªt
+.
+a
+ & 0xffff;
+
+85 
+mwaô
+.
+max_löe_size
+ = 
+ªt
+.
+b
+ & 0xffff;
+
+87 i‡(
+ªt
+.
+c
+ & 0x1) {
+
+88 
+mwaô
+.
+öts_as_bªaks
+ = !!(
+ªt
+.
+c
+ & 0x2);
+
+89 
+mwaô
+.
+c0_sub°©es
+ = 
+ªt
+.
+d
+ & 0xf;
+
+90 
+mwaô
+.
+c1_sub°©es
+ = (
+ªt
+.
+d
+ >> 4) & 0xf;
+
+91 
+mwaô
+.
+c2_sub°©es
+ = (
+ªt
+.
+d
+ >> 8) & 0xf;
+
+92 
+mwaô
+.
+c3_sub°©es
+ = (
+ªt
+.
+d
+ >> 12) & 0xf;
+
+93 
+mwaô
+.
+c4_sub°©es
+ = (
+ªt
+.
+d
+ >> 16) & 0xf;
+
+96 
+	`dump_mwaô_öfo
+();
+
+99 
+	}
+}
+
+	@numa.c
+
+23 
+	~<«utûus/«utûus.h
+>
+
+24 
+	~<«utûus/numa.h
+>
+
+25 
+	~<«utûus/mm.h
+>
+
+26 
+	~<«utûus/ma¸os.h
+>
+
+27 
+	~<«utûus/î∫o.h
+>
+
+28 
+	~<«utûus/a˝i.h
+>
+
+30 
+	#u8
+ 
+uöt8_t
+
+
+	)
+
+31 
+	#u16
+ 
+uöt16_t
+
+
+	)
+
+32 
+	#u32
+ 
+uöt32_t
+
+
+	)
+
+33 
+	#u64
+ 
+uöt64_t
+
+
+	)
+
+35 
+	g§©_ªv
+;
+
+38 #i‚de‡
+NAUT_CONFIG_DEBUG_NUMA
+
+
+39 #unde‡
+DEBUG_PRINT
+
+
+40 
+	#DEBUG_PRINT
+(
+fmt
+, 
+¨gs
+...)
+
+	)
+
+42 
+	#NUMA_PRINT
+(
+fmt
+, 
+¨gs
+...Ë
+	`¥ötk
+("NUMA: " fmt, ##¨gs)
+
+	)
+
+43 
+	#NUMA_DEBUG
+(
+fmt
+, 
+¨gs
+...Ë
+	`DEBUG_PRINT
+("NUMA: " fmt, ##¨gs)
+
+	)
+
+44 
+	#NUMA_ERROR
+(
+fmt
+, 
+¨gs
+...Ë
+	`ERROR_PRINT
+("NUMA: " fmt, ##¨gs)
+
+	)
+
+47 
+	$a˝i_èbÀ_¥öt_§©_íåy
+ (
+a˝i_subèbÀ_hódî
+ * 
+hódî
+)
+
+50 
+	`ACPI_FUNCTION_NAME
+("acpi_table_print_srat_entry");
+
+52 i‡(!
+hódî
+)
+
+55 
+hódî
+->
+ty≥
+) {
+
+57 
+ACPI_SRAT_TYPE_CPU_AFFINITY
+:
+
+59 
+a˝i_§©_˝u_afföôy
+ *
+p
+ =
+
+60 
+	`c⁄èöî_of
+(
+hódî
+, 
+a˝i_§©_˝u_afföôy
+, header);
+
+61 
+u32
+ 
+¥oximôy_domaö
+ = 
+p
+->
+¥oximôy_domaö_lo
+;
+
+63 i‡(
+§©_ªv
+ >= 2) {
+
+64 
+¥oximôy_domaö
+ |
+p
+->
+¥oximôy_domaö_hi
+[0] << 8;
+
+65 
+¥oximôy_domaö
+ |
+p
+->
+¥oximôy_domaö_hi
+[1] << 16;
+
+66 
+¥oximôy_domaö
+ |
+p
+->
+¥oximôy_domaö_hi
+[2] << 24;
+
+68 
+	`NUMA_DEBUG
+("SRAT Processor (id[0x%02x]Éid[0x%02x]) inÖroximity domain %d %s\n",
+
+69 
+p
+->
+≠ic_id
+,Ö->
+loˇl_ßpic_eid
+,
+
+70 
+¥oximôy_domaö
+,
+
+71 
+p
+->
+Êags
+ & 
+ACPI_SRAT_CPU_ENABLED
+
+
+76 
+ACPI_SRAT_TYPE_MEMORY_AFFINITY
+:
+
+78 
+a˝i_§©_mem_afföôy
+ *
+p
+ =
+
+79 
+	`c⁄èöî_of
+(
+hódî
+, 
+a˝i_§©_mem_afföôy
+, header);
+
+80 
+u32
+ 
+¥oximôy_domaö
+ = 
+p
+->proximity_domain;
+
+82 i‡(
+§©_ªv
+ < 2)
+
+83 
+¥oximôy_domaö
+ &= 0xff;
+
+84 
+	`NUMA_DEBUG
+("SRAT Memory (0x%016llxÜength 0x%016llxÅype 0x%x) inÖroximity domain %d %s%s\n",
+
+85 
+p
+->
+ba£_addªss
+,Ö->
+Àngth
+,
+
+86 
+p
+->
+mem‹y_ty≥
+, 
+¥oximôy_domaö
+,
+
+87 
+p
+->
+Êags
+ & 
+ACPI_SRAT_MEM_ENABLED
+
+
+89 
+p
+->
+Êags
+ & 
+ACPI_SRAT_MEM_HOT_PLUGGABLE
+
+
+94 
+ACPI_SRAT_TYPE_X2APIC_CPU_AFFINITY
+:
+
+96 
+a˝i_§©_x2≠ic_˝u_afföôy
+ *
+p
+ =
+
+97 (
+a˝i_§©_x2≠ic_˝u_afföôy
+ *)
+hódî
+;
+
+98 
+	`NUMA_DEBUG
+("SRAT Processor (x2apicid[0x%08x]) in"
+
+100 
+p
+->
+≠ic_id
+,
+
+101 
+p
+->
+¥oximôy_domaö
+,
+
+102 (
+p
+->
+Êags
+ & 
+ACPI_SRAT_CPU_ENABLED
+) ?
+
+107 
+	`NUMA_DEBUG
+("Found unsupported SRATÉntry (type = 0x%x)\n",
+
+108 
+hódî
+->
+ty≥
+);
+
+111 
+	}
+}
+
+114 
+	$a˝i_∑r£_x2≠ic_afföôy
+(
+a˝i_subèbÀ_hódî
+ *
+hódî
+,
+
+115 c⁄° 
+íd
+)
+
+117 
+a˝i_§©_x2≠ic_˝u_afföôy
+ *
+¥o˚ss‹_afföôy
+;
+
+119 
+¥o˚ss‹_afföôy
+ = (
+a˝i_§©_x2≠ic_˝u_afföôy
+ *)
+hódî
+;
+
+121 i‡(!
+¥o˚ss‹_afföôy
+) {
+
+122  -
+EINVAL
+;
+
+125 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+126 
+i
+;
+
+127 
+uöt32_t
+ 
+domaö_id
+;
+
+129 i‡(!(
+¥o˚ss‹_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_CPU_ENABLED
+)) {
+
+130 
+	`NUMA_DEBUG
+("Processoráffinity for disabled x2apicÖrocessor...\n");
+
+134 
+	`a˝i_èbÀ_¥öt_§©_íåy
+(
+hódî
+);
+
+136 
+i
+ = 0; i < 
+sys
+->
+num_˝us
+; i++) {
+
+137 i‡(
+sys
+->
+˝us
+[
+i
+]->
+œpic_id
+ =
+¥o˚ss‹_afföôy
+->
+≠ic_id
+) {
+
+138 
+domaö_id
+ = 
+¥o˚ss‹_afföôy
+->
+¥oximôy_domaö
+;
+
+139 
+sys
+->
+˝us
+[
+i
+]->
+domaö
+ = sys->
+loˇlôy_öfo
+.
+domaös
+[
+domaö_id
+];
+
+144 i‡(
+i
+==
+sys
+->
+num_˝us
+) {
+
+145 
+	`NUMA_ERROR
+("Afföôy f‹ x2≠i¯¥o˚ss‹ %xÇŸ found\n",
+¥o˚ss‹_afföôy
+->
+≠ic_id
+);
+
+149 
+	}
+}
+
+153 
+	$a˝i_èbÀ_∑r£_§©
+(
+a˝i_§©_íåy_id
+ 
+id
+,
+
+154 
+a˝i_madt_íåy_h™dÀr
+ 
+h™dÀr
+, 
+max_íåõs
+)
+
+156  
+	`a˝i_èbÀ_∑r£_íåõs
+(
+ACPI_SIG_SRAT
+,
+
+157 (
+a˝i_èbÀ_§©
+), 
+id
+,
+
+158 
+h™dÀr
+, 
+max_íåõs
+);
+
+159 
+	}
+}
+
+163 
+	$a˝i_∑r£_¥o˚ss‹_afföôy
+(
+a˝i_subèbÀ_hódî
+ * 
+hódî
+,
+
+164 c⁄° 
+íd
+)
+
+166 
+a˝i_§©_˝u_afföôy
+ *
+¥o˚ss‹_afföôy
+
+
+167 
+	`c⁄èöî_of
+(
+hódî
+, 
+a˝i_§©_˝u_afföôy
+, header);
+
+169 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+170 
+i
+;
+
+171 
+uöt32_t
+ 
+domaö_id
+;
+
+173 i‡(!
+¥o˚ss‹_afföôy
+)
+
+174  -
+EINVAL
+;
+
+176 i‡(!(
+¥o˚ss‹_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_CPU_ENABLED
+)) {
+
+177 
+	`NUMA_DEBUG
+("Processoráffinity for disabledÖrocessor...\n");
+
+181 
+	`a˝i_èbÀ_¥öt_§©_íåy
+(
+hódî
+);
+
+184 
+i
+ = 0; i < 
+sys
+->
+num_˝us
+; i++) {
+
+185 i‡(
+sys
+->
+˝us
+[
+i
+]->
+œpic_id
+ =
+¥o˚ss‹_afföôy
+->
+≠ic_id
+) {
+
+186 
+domaö_id
+ = 
+¥o˚ss‹_afföôy
+->
+¥oximôy_domaö_lo
+ |
+
+187 (((*(
+uöt32_t
+*)(&(
+¥o˚ss‹_afföôy
+->
+¥oximôy_domaö_hi
+))) & 0xffffff) << 8);
+
+189 
+sys
+->
+˝us
+[
+i
+]->
+domaö
+ = sys->
+loˇlôy_öfo
+.
+domaös
+[
+domaö_id
+];
+
+194 i‡(
+i
+==
+sys
+->
+num_˝us
+) {
+
+195 
+	`NUMA_ERROR
+("Afföôy f‹Öro˚ss‹ %dÇŸ found\n",
+¥o˚ss‹_afföôy
+->
+≠ic_id
+);
+
+199 
+	}
+}
+
+207 
+	$a˝i_∑r£_mem‹y_afföôy
+(
+a˝i_subèbÀ_hódî
+ * 
+hódî
+,
+
+208 c⁄° 
+íd
+)
+
+210 
+a˝i_§©_mem_afföôy
+ *
+mem‹y_afföôy
+
+
+211 
+	`c⁄èöî_of
+(
+hódî
+, 
+a˝i_§©_mem_afföôy
+, header);
+
+213 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+214 
+mem_ªgi⁄
+ * 
+mem
+ = 
+NULL
+;
+
+215 
+numa_domaö
+ * 
+domaö
+ = 
+NULL
+;
+
+216 
+mem_ªgi⁄
+ * 
+ít
+ = 
+NULL
+;
+
+218 i‡(!
+mem‹y_afföôy
+)
+
+219  -
+EINVAL
+;
+
+221 i‡(!(
+mem‹y_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_MEM_ENABLED
+)) {
+
+222 
+	`NUMA_DEBUG
+("Disabled memoryÑegionáffinity...\n");
+
+226 i‡(
+mem‹y_afföôy
+->
+Àngth
+ == 0 ) {
+
+227 
+	`NUMA_DEBUG
+("WhackyÜength zero memoryÑegion...\n");
+
+231 
+	`a˝i_èbÀ_¥öt_§©_íåy
+(
+hódî
+);
+
+233 
+mem
+ = 
+	`mm_boŸ_Æloc
+((
+mem_ªgi⁄
+));
+
+234 i‡(!
+mem
+) {
+
+235 
+	`ERROR_PRINT
+("CouldÇotállocate memÑegion\n");
+
+238 
+	`mem£t
+(
+mem
+, 0, (
+mem_ªgi⁄
+));
+
+240 
+mem
+->
+domaö_id
+ = 
+mem‹y_afföôy
+->
+¥oximôy_domaö
+ & ((
+§©_ªv
+ < 2) ? 0xff : 0xffffffff);
+
+241 
+mem
+->
+ba£_addr
+ = 
+mem‹y_afföôy
+->
+ba£_addªss
+;
+
+242 
+mem
+->
+Àn
+ = 
+mem‹y_afföôy
+->
+Àngth
+;
+
+243 
+mem
+->
+íabÀd
+ = 
+mem‹y_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_MEM_ENABLED
+;
+
+244 
+mem
+->
+hŸ_∂uggabÀ
+ = 
+mem‹y_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_MEM_HOT_PLUGGABLE
+;
+
+245 
+mem
+->
+n⁄vﬁ©ûe
+ = 
+mem‹y_afföôy
+->
+Êags
+ & 
+ACPI_SRAT_MEM_NON_VOLATILE
+;
+
+247 
+	`ASSERT
+(
+mem
+->
+domaö_id
+ < 
+MAX_NUMA_DOMAINS
+);
+
+249 
+	`NUMA_DEBUG
+("Mem‹yÑegi⁄: domaö 0x%lx, ba£ %p,Üí 0x%lx,É«bÀd=%d hŸ_∂ug=%dÇv=%d\n", 
+mem
+->
+domaö_id
+, mem->
+ba£_addr
+, mem->
+Àn
+, mem->
+íabÀd
+, mem->
+hŸ_∂uggabÀ
+, mem->
+n⁄vﬁ©ûe
+);
+
+252 i‡(
+sys
+->
+loˇlôy_öfo
+.
+domaös
+[
+mem
+->
+domaö_id
+] =
+NULL
+) {
+
+254 
+	`NUMA_DEBUG
+("Region is inÇew domain\n");
+
+256 
+domaö
+ = (
+numa_domaö
+ *)
+	`mm_boŸ_Æloc
+((numa_domain));
+
+257 i‡(!
+domaö
+) {
+
+258 
+	`ERROR_PRINT
+("CouldÇotállocate NUMA domain\n");
+
+261 
+	`mem£t
+(
+domaö
+, 0, (
+numa_domaö
+));
+
+262 
+domaö
+->
+id
+ = 
+mem
+->
+domaö_id
+;
+
+263 
+	`INIT_LIST_HEAD
+(&(
+domaö
+->
+ªgi⁄s
+));
+
+264 
+	`INIT_LIST_HEAD
+(&(
+domaö
+->
+adj_li°
+));
+
+266 i‡(
+mem
+->
+domaö_id
+ !(
+sys
+->
+loˇlôy_öfo
+.
+num_domaös
++1)) {
+
+267 
+	`NUMA_DEBUG
+("MemoryÑegionsáreÇot inÉxpected domain order, butÅhat should be OK\n");
+
+270 
+sys
+->
+loˇlôy_öfo
+.
+domaös
+[
+domaö
+->
+id
+] = domain;
+
+271 
+sys
+->
+loˇlôy_öfo
+.
+num_domaös
+++;
+
+274 
+	`NUMA_DEBUG
+("Region is inÉxisting domain\n");
+
+275 
+domaö
+ = 
+sys
+->
+loˇlôy_öfo
+.
+domaös
+[
+mem
+->
+domaö_id
+];
+
+278 
+domaö
+->
+num_ªgi⁄s
+++;
+
+279 
+domaö
+->
+addr_•a˚_size
+ +
+mem
+->
+Àn
+;
+
+281 
+	`NUMA_DEBUG
+("DomaöÇow ha†0x%lxÑegi⁄†™d sizê0x%lx\n", 
+domaö
+->
+num_ªgi⁄s
+, domaö->
+addr_•a˚_size
+);
+
+283 i‡(
+	`li°_em±y
+(&
+domaö
+->
+ªgi⁄s
+)) {
+
+284 
+	`li°_add
+(&
+mem
+->
+íåy
+, &
+domaö
+->
+ªgi⁄s
+);
+
+287 
+	`li°_f‹_óch_íåy
+(
+ít
+, &
+domaö
+->
+ªgi⁄s
+, 
+íåy
+) {
+
+288 i‡(
+mem
+->
+ba£_addr
+ < 
+ít
+->base_addr) {
+
+289 
+	`NUMA_DEBUG
+("AddedÑegi⁄Öri‹Åÿªgi⁄ wôh ba£áddªs†0x%lx\n",
+ít
+->
+ba£_addr
+);
+
+290 
+	`li°_add_èû
+(&
+mem
+->
+íåy
+, &
+ít
+->entry);
+
+294 
+	`li°_add_èû
+(&
+mem
+->
+íåy
+, &
+domaö
+->
+ªgi⁄s
+);
+
+299 
+	}
+}
+
+303 
+	$a˝i_∑r£_§©
+ (
+a˝i_èbÀ_hódî
+ * 
+hdr
+, * 
+¨g
+)
+
+305 
+	`NUMA_DEBUG
+("Parsing SRAT...\n");
+
+306 
+§©_ªv
+ = 
+hdr
+->
+ªvisi⁄
+;
+
+309 
+	}
+}
+
+313 
+	$a˝i_∑r£_¶ô
+(
+a˝i_èbÀ_hódî
+ *
+èbÀ
+, * 
+¨g
+)
+
+315 
+nk_loˇlôy_öfo
+ * 
+numa
+ = (nk_loˇlôy_öfo*)
+¨g
+;
+
+316 
+a˝i_èbÀ_¶ô
+ * 
+¶ô
+ = (a˝i_èbÀ_¶ô*)
+èbÀ
+;
+
+317 #ifde‡
+NAUT_CONFIG_DEBUG_NUMA
+
+
+318 
+i
+, 
+j
+;
+
+320 
+	`NUMA_DEBUG
+("Parsing SLIT...\n");
+
+321 
+	`NUMA_DEBUG
+("Loˇlôy Cou¡: %Œu\n", 
+¶ô
+->
+loˇlôy_cou¡
+);
+
+323 
+	`NUMA_DEBUG
+(" Entries:\n");
+
+324 
+	`NUMA_DEBUG
+(" ");
+
+325 
+i
+ = 0; i < 
+¶ô
+->
+loˇlôy_cou¡
+; i++) {
+
+326 
+	`¥ötk
+("%02u ");
+
+328 
+	`¥ötk
+("\n");
+
+330 
+i
+ = 0; i < 
+¶ô
+->
+loˇlôy_cou¡
+; i++) {
+
+331 
+	`NUMA_DEBUG
+("%02u ", 
+i
+);
+
+332 
+j
+ = 0; j < 
+¶ô
+->
+loˇlôy_cou¡
+; j++) {
+
+333 
+	`¥ötk
+("%02u ", *(
+uöt8_t
+*)(
+¶ô
+->
+íåy
+ + 
+i
+*¶ô->
+loˇlôy_cou¡
+ + 
+j
+));
+
+335 
+	`¥ötk
+("\n");
+
+338 
+	`NUMA_DEBUG
+("DONE.\n");
+
+342 
+numa
+->
+numa_m©rix
+ = 
+	`mm_boŸ_Æloc
+(
+¶ô
+->
+loˇlôy_cou¡
+ * slit->locality_count);
+
+343 i‡(!
+numa
+->
+numa_m©rix
+) {
+
+344 
+	`ERROR_PRINT
+("CouldÇotállocate NUMA matrix\n");
+
+348 
+	`mem˝y
+((*)
+numa
+->
+numa_m©rix
+,
+
+349 (*)
+¶ô
+->
+íåy
+,
+
+350 
+¶ô
+->
+loˇlôy_cou¡
+ * slit->locality_count);
+
+353 
+	}
+}
+
+362 
+	$¨ch_numa_öô
+ (
+sys_öfo
+ * 
+sys
+)
+
+364 
+	`NUMA_PRINT
+("Parsing ACPI NUMA information...\n");
+
+367 i‡(
+	`a˝i_èbÀ_∑r£
+(
+ACPI_SIG_SLIT
+, 
+a˝i_∑r£_¶ô
+, &(
+sys
+->
+loˇlôy_öfo
+))) {
+
+368 
+	`NUMA_DEBUG
+("UnableÅoÖarse SLIT\n");
+
+372 i‡(!
+	`a˝i_èbÀ_∑r£
+(
+ACPI_SIG_SRAT
+, 
+a˝i_∑r£_§©
+, &(
+sys
+->
+loˇlôy_öfo
+))) {
+
+374 
+	`NUMA_DEBUG
+("Parsing SRAT_MEMORY_AFFINITYÅable...\n");
+
+376 i‡(
+	`a˝i_èbÀ_∑r£_§©
+(
+ACPI_SRAT_MEMORY_AFFINITY
+,
+
+377 
+a˝i_∑r£_mem‹y_afföôy
+, 
+NAUT_CONFIG_MAX_CPUS
+ * 2)) {
+
+378 
+	`NUMA_DEBUG
+("UnableÅoÖarse memoryáffinity\n");
+
+381 
+	`NUMA_DEBUG
+("DONE.\n");
+
+383 
+	`NUMA_DEBUG
+("Parsing SRAT_TYPE_X2APIC_CPU_AFFINITYÅable...\n");
+
+385 i‡(
+	`a˝i_èbÀ_∑r£_§©
+(
+ACPI_SRAT_TYPE_X2APIC_CPU_AFFINITY
+,
+
+386 
+a˝i_∑r£_x2≠ic_afföôy
+, 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+387 
+	`NUMA_DEBUG
+("UnableÅoÖarse x2apic\n");
+
+390 
+	`NUMA_DEBUG
+("DONE.\n");
+
+392 
+	`NUMA_DEBUG
+("Parsing SRAT_PROCESSOR_AFFINITYÅable...\n");
+
+394 i‡(
+	`a˝i_èbÀ_∑r£_§©
+(
+ACPI_SRAT_PROCESSOR_AFFINITY
+,
+
+395 
+a˝i_∑r£_¥o˚ss‹_afföôy
+,
+
+396 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+397 
+	`NUMA_DEBUG
+("UnableÅoÖarseÖrocessoráffinity\n");
+
+399 
+	`NUMA_DEBUG
+("DONE.\n");
+
+403 
+	`NUMA_PRINT
+("DONE.\n");
+
+406 
+	}
+}
+
+	@shutdown.c
+
+23 
+	~<«utûus/«utûus.h
+>
+
+24 
+	~<«utûus/«ut_ty≥s.h
+>
+
+25 
+	~<«utûus/˝u.h
+>
+
+26 
+	~<«utûus/a˝i.h
+>
+
+27 
+	~<«utûus/shutdown.h
+>
+
+28 
+	~<a˝i/a˝i.h
+>
+
+29 
+	~<dev/ps2.h
+>
+
+32 
+	$ªboŸ
+ ()
+
+35 
+	`outb
+(1, 0x92);
+
+38 
+	`˛i
+();
+
+40 
+tmp
+ = 
+	`öb
+(
+KBD_CMD_REG
+);
+
+42 i‡(
+	`__CHECK_BIT
+(
+tmp
+, 
+KBD_BIT_KDATA
+)) {
+
+43 
+	`öb
+(
+KBD_DATA_REG
+);
+
+45 } 
+	`__CHECK_BIT
+(
+tmp
+, 
+KBD_BIT_UDATA
+));
+
+47 
+	`outb
+(
+KBD_RESET
+, 
+KBD_CMD_REG
+);
+
+51 
+	`hÆt
+();
+
+53 
+	}
+}
+
+56 
+	$a˝i_ªboŸ
+ ()
+
+59 
+	}
+}
+
+61 
+	sshutdown_öfo
+ {
+
+62 
+uöt32_t
+ 
+	msmi_cmd
+;
+
+63 
+uöt8_t
+ 
+	ma˝i_íabÀ
+;
+
+64 
+uöt8_t
+ 
+	ma˝i_dißbÀ
+;
+
+65 
+uöt32_t
+ 
+	mpm1a_˙t
+;
+
+66 
+uöt32_t
+ 
+	mpm1b_˙t
+;
+
+67 
+uöt16_t
+ 
+	m¶p_ty∑
+;
+
+68 
+uöt16_t
+ 
+	m¶p_typb
+;
+
+69 
+uöt16_t
+ 
+	m¶p_í
+;
+
+70 
+uöt16_t
+ 
+	msci_í
+;
+
+71 
+uöt8_t
+ 
+	mpm1_˙t_Àn
+;
+
+72 
+uöt32_t
+ 
+	mdsdt
+;
+
+73 
+uöt64_t
+ 
+	mxdsdt
+;
+
+75 
+uöt8_t
+ 
+	mshutdown_ok
+;
+
+80 
+	$åy_a˝i_shutdown
+ (
+a˝i_èbÀ_hódî
+ * 
+hdr
+, * 
+¨g
+)
+
+82 
+shutdown_öfo
+ * 
+s
+ = (shutdown_öfÿ*)
+¨g
+;
+
+83 
+a˝i_èbÀ_Ádt
+ * 
+Ádt
+ = (a˝i_èbÀ_Ádt*)
+hdr
+;
+
+85 
+	`¥ötk
+("Parsing fadt\n");
+
+87 
+s
+->
+dsdt
+ = 
+Ádt
+->dsdt;
+
+88 
+s
+->
+xdsdt
+ = 
+Ádt
+->
+Xdsdt
+;
+
+89 
+s
+->
+smi_cmd
+ = 
+Ádt
+->
+smi_comm™d
+;
+
+90 
+s
+->
+a˝i_íabÀ
+ = 
+Ádt
+->acpi_enable;
+
+91 
+s
+->
+a˝i_dißbÀ
+ = 
+Ádt
+->acpi_disable;
+
+92 
+s
+->
+pm1a_˙t
+ = 
+Ádt
+->
+pm1a_c⁄åﬁ_block
+;
+
+93 
+s
+->
+pm1b_˙t
+ = 
+Ádt
+->
+pm1b_c⁄åﬁ_block
+;
+
+94 
+s
+->
+pm1_˙t_Àn
+ = 
+Ádt
+->
+pm1_c⁄åﬁ_Àngth
+;
+
+95 
+s
+->
+¶p_í
+ = 1<<13;
+
+96 
+s
+->
+sci_í
+ = 1;
+
+99 
+	}
+}
+
+102 
+	$gë_s5
+ (
+shutdown_öfo
+ * 
+s
+)
+
+104 
+a˝i_èbÀ_hódî
+ * 
+hdr
+ = (a˝i_èbÀ_hódî*)(
+uöt64_t
+)
+s
+->
+dsdt
+;
+
+105 
+uöt32_t
+ 
+Àn
+ = 
+hdr
+->
+Àngth
+;
+
+106 
+i
+;
+
+107 * 
+curs‹
+ = 
+NULL
+;
+
+109 i‡(
+	`memcmp
+((*)(
+uöt64_t
+)
+s
+->
+dsdt
+, "DSDT", 4)) {
+
+110 
+	`¥ötk
+("NOT REALLY DSDT\n");
+
+113 
+	`¥ötk
+("dsdài†© %p,Üí=%u\n", (*)
+hdr
+, 
+Àn
+);
+
+114 
+i
+ = 0; i < 
+Àn
+; i++) {
+
+115 * 
+tmp
+ = (*)(
+uöt64_t
+)
+s
+->
+dsdt
+ + 
+i
+;
+
+116 i‡(!
+	`memcmp
+(
+tmp
+, "_S5_", 4)) {
+
+117 
+s
+->
+shutdown_ok
+ = 1;
+
+118 
+	`¥ötk
+("found s5\n");
+
+119 
+curs‹
+ = 
+tmp
+;
+
+124 i‡(!
+s
+->
+shutdown_ok
+) {
+
+125 
+	`¥ötk
+("no S5 found\n");
+
+129 i‡((*(
+curs‹
+-1) == 0x08 || ( *(cursor-2) == 0x08 && *(cursor-1) == '\\')) && *(cursor+4) == 0x12) {
+
+130 
+	`¥ötk
+("valid AML for shutdown\n");
+
+132 
+curs‹
+ += 5;
+
+133 
+curs‹
+ += ((*cursor & 0xc0) >> 6) + 2;
+
+135 i‡(*
+curs‹
+ == 0x0a) {
+
+136 
+curs‹
+++;
+
+139 
+s
+->
+¶p_ty∑
+ = *
+curs‹
+ << 10;
+
+140 
+curs‹
+++;
+
+142 i‡(*
+curs‹
+ == 0x0a) {
+
+143 
+curs‹
+++;
+
+145 
+s
+->
+¶p_typb
+ = *
+curs‹
+ << 10;
+
+151 
+	}
+}
+
+157 
+	$a˝i_shutdown
+ ()
+
+159 
+shutdown_öfo
+ 
+s
+;
+
+160 
+	`mem£t
+(&
+s
+, 0, (s));
+
+162 i‡(
+	`a˝i_èbÀ_∑r£
+(
+ACPI_SIG_FADT
+, 
+åy_a˝i_shutdown
+, &
+s
+)) {
+
+163 
+out_nﬂ˝i
+;
+
+166 
+	`gë_s5
+(&
+s
+);
+
+168 i‡(!
+s
+.
+shutdown_ok
+) {
+
+169 
+out_nﬂ˝i
+;
+
+173 i‡(
+s
+.
+sci_í
+ == 0) {
+
+174 
+out_nﬂ˝i
+;
+
+177 
+	`outw
+(
+s
+.
+¶p_ty∑
+ | s.
+¶p_í
+, s.
+pm1a_˙t
+);
+
+178 i‡(
+s
+.
+pm1b_˙t
+) {
+
+179 
+	`outw
+(
+s
+.
+¶p_typb
+ | s.
+¶p_í
+, ()s.
+pm1b_˙t
+);
+
+182 
+out_nﬂ˝i
+:
+
+183 
+	`¥ötk
+("System halting.\n");
+
+186 
+	`hÆt
+();
+
+189 
+	}
+}
+
+	@smp.c
+
+23 
+	~<«utûus/«utûus.h
+>
+
+24 
+	~<«utûus/a˝i.h
+>
+
+25 
+	~<«utûus/smp.h
+>
+
+26 
+	~<«utûus/sfi.h
+>
+
+27 
+	~<«utûus/úq.h
+>
+
+28 
+	~<«utûus/mm.h
+>
+
+29 
+	~<«utûus/≥r˝u.h
+>
+
+30 
+	~<«utûus/numa.h
+>
+
+31 
+	~<«utûus/˝u.h
+>
+
+33 #i‚de‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+34 #unde‡
+DEBUG_PRINT
+
+
+35 
+	#DEBUG_PRINT
+(
+fmt
+, 
+¨gs
+...)
+
+	)
+
+37 
+	#SMP_PRINT
+(
+fmt
+, 
+¨gs
+...Ë
+	`¥ötk
+("SMP: " fmt, ##¨gs)
+
+	)
+
+38 
+	#SMP_DEBUG
+(
+fmt
+, 
+¨gs
+...Ë
+	`DEBUG_PRINT
+("SMP: " fmt, ##¨gs)
+
+	)
+
+39 
+	#SMP_ERROR
+(
+fmt
+, 
+¨gs
+...Ë
+	`ERROR_PRINT
+("SMP: " fmt, ##¨gs)
+
+	)
+
+42 
+uöt8_t
+ 
+	gmp_íåy_Àngths
+[5] = {
+
+43 
+MP_TAB_CPU_LEN
+,
+
+44 
+MP_TAB_BUS_LEN
+,
+
+45 
+MP_TAB_IOAPIC_LEN
+,
+
+46 
+MP_TAB_IO_INT_LEN
+,
+
+47 
+MP_TAB_LINT_LEN
+,
+
+52 
+	$∑r£_m±abÀ_˝u
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ_íåy_˝u
+ * 
+˝u
+)
+
+54 
+˝u
+ * 
+√w_˝u
+ = 
+NULL
+;
+
+56 i‡(
+sys
+->
+num_˝us
+ =
+NAUT_CONFIG_MAX_CPUS
+) {
+
+57 
+	`∑nic
+("CPU countÉxceeded max (check your .config)\n");
+
+60 if(!(
+√w_˝u
+ = 
+	`mm_boŸ_Æloc
+((
+˝u
+)))) {
+
+61 
+	`∑nic
+("Couldn'tállocate CPU struct\n");
+
+63 
+	`mem£t
+(
+√w_˝u
+, 0, (
+˝u
+));
+
+65 
+√w_˝u
+->
+id
+ = 
+sys
+->
+num_˝us
+;
+
+66 
+√w_˝u
+->
+œpic_id
+ = 
+˝u
+->lapic_id;
+
+68 
+√w_˝u
+->
+íabÀd
+ = 
+˝u
+->enabled;
+
+69 
+√w_˝u
+->
+is_b•
+ = 
+˝u
+->is_bsp;
+
+70 
+√w_˝u
+->
+˝u_sig
+ = 
+˝u
+->
+sig
+;
+
+71 
+√w_˝u
+->
+„©_Êags
+ = 
+˝u
+->feat_flags;
+
+72 
+√w_˝u
+->
+sy°em
+ = 
+sys
+;
+
+73 
+√w_˝u
+->
+˝u_khz
+ = 
+	`nk_dëe˘_˝u_‰eq
+“ew_˝u->
+id
+);
+
+75 
+	`SMP_DEBUG
+("CPU %u -- LAPIC ID 0x%x -- Fótuªs: ", 
+√w_˝u
+->
+id
+,Çew_˝u->
+œpic_id
+);
+
+76 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+77 
+	`¥ötk
+("%s", (
+√w_˝u
+->
+„©_Êags
+ & 1) ? "fpu " : "");
+
+78 
+	`¥ötk
+("%s", (
+√w_˝u
+->
+„©_Êags
+ & (1<<7)) ? "mce " : "");
+
+79 
+	`¥ötk
+("%s", (
+√w_˝u
+->
+„©_Êags
+ & (1<<8)) ? "cx8 " : "");
+
+80 
+	`¥ötk
+("%s", (
+√w_˝u
+->
+„©_Êags
+ & (1<<9)) ? "apic " : "");
+
+81 
+	`¥ötk
+("\n");
+
+83 
+	`SMP_DEBUG
+("\tE«bÀd?=%01d\n", 
+√w_˝u
+->
+íabÀd
+);
+
+84 
+	`SMP_DEBUG
+("\tBSP?=%01d\n", 
+√w_˝u
+->
+is_b•
+);
+
+85 
+	`SMP_DEBUG
+("\tSig«tuª=0x%x\n", 
+√w_˝u
+->
+˝u_sig
+);
+
+86 
+	`SMP_DEBUG
+("\tFªq=%lu.%03lu MHz\n", 
+√w_˝u
+->
+˝u_khz
+/1000,Çew_cpu->cpu_khz%1000);
+
+88 
+	`•ölock_öô
+(&
+√w_˝u
+->
+lock
+);
+
+90 
+sys
+->
+˝us
+[sys->
+num_˝us
+] = 
+√w_˝u
+;
+
+92 
+sys
+->
+num_˝us
+++;
+
+93 
+	}
+}
+
+97 
+	$∑r£_m±abÀ_iﬂpic
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ_íåy_iﬂpic
+ * 
+iﬂpic
+)
+
+99 
+iﬂpic
+ * 
+iﬂ
+ = 
+NULL
+;
+
+100 i‡(
+sys
+->
+num_iﬂpics
+ =
+NAUT_CONFIG_MAX_IOAPICS
+) {
+
+101 
+	`∑nic
+("IOAPIC countÉxceeded max (change it in .config)\n");
+
+104 i‡(!(
+iﬂ
+ = 
+	`mm_boŸ_Æloc
+((
+iﬂpic
+)))) {
+
+105 
+	`∑nic
+("Couldn'tállocate IOAPIC struct\n");
+
+107 
+	`mem£t
+(
+iﬂ
+, 0, (
+iﬂpic
+));
+
+109 
+	`SMP_DEBUG
+("IOAPICÉntry:\n");
+
+110 
+	`SMP_DEBUG
+("\tID=0x%x\n", 
+iﬂpic
+->
+id
+);
+
+111 
+	`SMP_DEBUG
+("\tVîsi⁄=0x%x\n", 
+iﬂpic
+->
+vîsi⁄
+);
+
+112 
+	`SMP_DEBUG
+("\tE«bÀd?=%01d\n", 
+iﬂpic
+->
+íabÀd
+);
+
+113 
+	`SMP_DEBUG
+("\tBa£ Addr=0x%lx\n", 
+iﬂpic
+->
+addr
+);
+
+115 
+iﬂ
+->
+id
+ = 
+iﬂpic
+->id;
+
+116 
+iﬂ
+->
+vîsi⁄
+ = 
+iﬂpic
+->version;
+
+117 
+iﬂ
+->
+ußbÀ
+ = 
+iﬂpic
+->
+íabÀd
+;
+
+118 
+iﬂ
+->
+ba£
+ = (
+addr_t
+)
+iﬂpic
+->
+addr
+;
+
+120 
+sys
+->
+iﬂpics
+[sys->
+num_iﬂpics
+] = 
+iﬂ
+;
+
+121 
+sys
+->
+num_iﬂpics
+++;
+
+122 
+	}
+}
+
+126 
+	$∑r£_m±abÀ_löt
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ_íåy_löt
+ * 
+löt
+)
+
+128 * 
+ty≥_m≠
+[4] = {"[INT]", "[NMI]", "[SMI]", "[ExtINT]"};
+
+129 * 
+po_m≠
+[4] = {"[BUS]", "[ActHi]", "[Rsvd]", "[ActLo]"};
+
+130 * 
+ñ_m≠
+[4] = {"[BUS]", "[Edge]", "[Rsvd]", "[Level]"};
+
+131 
+uöt8_t
+ 
+pﬁ¨ôy
+ = 
+löt
+->
+öt_Êags
+ & 0x3;
+
+132 
+uöt8_t
+ 
+åig_mode
+ = (
+löt
+->
+öt_Êags
+ >> 2) & 0x3;
+
+133 
+	`SMP_DEBUG
+("LINTÉntry\n");
+
+134 
+	`SMP_DEBUG
+("\tI¡ Ty≥=%s\n", 
+ty≥_m≠
+[
+löt
+->
+öt_ty≥
+]);
+
+135 
+	`SMP_DEBUG
+("\tPﬁ¨ôy=%s\n", 
+po_m≠
+[
+pﬁ¨ôy
+]);
+
+136 
+	`SMP_DEBUG
+("\tTriggî Mode=%s\n", 
+ñ_m≠
+[
+åig_mode
+]);
+
+137 
+	`SMP_DEBUG
+("\tSr¯Bu†ID=0x%02x\n", 
+löt
+->
+§c_bus_id
+);
+
+138 
+	`SMP_DEBUG
+("\tSr¯Bu†IRQ=0x%02x\n", 
+löt
+->
+§c_bus_úq
+);
+
+139 
+	`SMP_DEBUG
+("\tD° LAPIC ID=0x%02x\n", 
+löt
+->
+d°_œpic_id
+);
+
+140 
+	`SMP_DEBUG
+("\tD° LAPIC LINTIN=0x%02x\n", 
+löt
+->
+d°_œpic_lötö
+);
+
+141 
+	}
+}
+
+144 
+	$∑r£_m±abÀ_ioöt
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ_íåy_ioöt
+ * 
+ioöt
+)
+
+146 * 
+ty≥_m≠
+[4] = {"[INT]", "[NMI]", "[SMI]", "[ExtINT]"};
+
+147 * 
+po_m≠
+[4] = {"[BUS]", "[ActHi]", "[Rsvd]", "[ActLo]"};
+
+148 * 
+ñ_m≠
+[4] = {"[BUS]", "[Edge]", "[Rsvd]", "[Level]"};
+
+149 
+uöt8_t
+ 
+pﬁ¨ôy
+ = 
+ioöt
+->
+öt_Êags
+ & 0x3;
+
+150 
+uöt8_t
+ 
+åig_mode
+ = (
+ioöt
+->
+öt_Êags
+ >> 2) & 0x3;
+
+151 
+	`SMP_DEBUG
+("IOINTÉntry\n");
+
+152 
+	`SMP_DEBUG
+("\tTy≥=%s\n", 
+ty≥_m≠
+[
+ioöt
+->
+öt_ty≥
+]);
+
+153 
+	`SMP_DEBUG
+("\tPﬁ¨ôy=%s\n", 
+po_m≠
+[
+pﬁ¨ôy
+]);
+
+154 
+	`SMP_DEBUG
+("\tTriggî Mode=%s\n", 
+ñ_m≠
+[
+åig_mode
+]);
+
+155 
+	`SMP_DEBUG
+("\tSr¯Bu†ID=0x%02x\n", 
+ioöt
+->
+§c_bus_id
+);
+
+156 
+	`SMP_DEBUG
+("\tSr¯Bu†IRQ=0x%02x\n", 
+ioöt
+->
+§c_bus_úq
+);
+
+157 
+	`SMP_DEBUG
+("\tD° IOAPIC ID=0x%02x\n", 
+ioöt
+->
+d°_iﬂpic_id
+);
+
+158 
+	`SMP_DEBUG
+("\tD° IOAPIC INT Pö=0x%02x\n", 
+ioöt
+->
+d°_iﬂpic_ötö
+);
+
+160 
+	`nk_add_öt_íåy
+(
+åig_mode
+,
+
+161 
+pﬁ¨ôy
+,
+
+162 
+ioöt
+->
+öt_ty≥
+,
+
+163 
+ioöt
+->
+§c_bus_id
+,
+
+164 
+ioöt
+->
+§c_bus_úq
+,
+
+165 
+ioöt
+->
+d°_iﬂpic_ötö
+,
+
+166 
+ioöt
+->
+d°_iﬂpic_id
+);
+
+167 
+	}
+}
+
+170 
+	$∑r£_m±abÀ_bus
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ_íåy_bus
+ * 
+bus
+)
+
+172 
+	`SMP_DEBUG
+("BusÉntry\n");
+
+173 
+	`SMP_DEBUG
+("\tBu†ID: 0x%02x\n", 
+bus
+->
+bus_id
+);
+
+174 
+	`SMP_DEBUG
+("\tTy≥: %.6s\n", 
+bus
+->
+bus_ty≥_°rög
+);
+
+175 
+	`nk_add_bus_íåy
+(
+bus
+->
+bus_id
+, bus->
+bus_ty≥_°rög
+);
+
+176 
+	}
+}
+
+178 
+uöt8_t
+
+
+179 
+	$blk_cksum_ok
+ (
+uöt8_t
+ * 
+mp
+, 
+Àn
+)
+
+181 
+sum
+ = 0;
+
+183 
+Àn
+--) {
+
+184 
+sum
+ +*
+mp
+++;
+
+187  ((
+sum
+ & 0xff) == 0);
+
+188 
+	}
+}
+
+192 
+	$∑r£_mp_èbÀ
+ (
+sys_öfo
+ * 
+sys
+, 
+mp_èbÀ
+ * 
+mp
+)
+
+194 
+cou¡
+ = 
+mp
+->
+íåy_˙t
+;
+
+195 
+uöt8_t
+ * 
+mp_íåy
+;
+
+198 i‡(
+	`°∫cmp
+((*)&
+mp
+->
+sig
+, "PCMP", 4) != 0) {
+
+199 
+	`SMP_ERROR
+("MP Table unexpected format\n");
+
+202 
+mp_íåy
+ = (
+uöt8_t
+*)&
+mp
+->
+íåõs
+;
+
+203 
+	`SMP_PRINT
+("P¨sög MP TabÀ (íåy cou¡=%u)\n", 
+mp
+->
+íåy_˙t
+);
+
+206 
+	`SMP_PRINT
+("Verifying MP Table integrity...");
+
+207 i‡(!
+	`blk_cksum_ok
+((
+uöt8_t
+*)
+mp
+, mp->
+Àn
+)) {
+
+208 
+	`¥ötk
+("FAIL\n");
+
+209 
+	`SMP_ERROR
+("Corrupt MP Table detected\n");
+
+211 
+	`¥ötk
+("OK\n");
+
+214 
+cou¡
+--) {
+
+216 
+uöt8_t
+ 
+ty≥
+ = *
+mp_íåy
+;
+
+218 
+ty≥
+) {
+
+219 
+MP_TAB_TYPE_CPU
+:
+
+220 
+	`∑r£_m±abÀ_˝u
+(
+sys
+, (
+mp_èbÀ_íåy_˝u
+*)
+mp_íåy
+);
+
+222 
+MP_TAB_TYPE_IOAPIC
+:
+
+223 
+	`∑r£_m±abÀ_iﬂpic
+(
+sys
+, (
+mp_èbÀ_íåy_iﬂpic
+*)
+mp_íåy
+);
+
+225 
+MP_TAB_TYPE_IO_INT
+:
+
+226 
+	`∑r£_m±abÀ_ioöt
+(
+sys
+, (
+mp_èbÀ_íåy_ioöt
+*)
+mp_íåy
+);
+
+228 
+MP_TAB_TYPE_BUS
+:
+
+229 
+	`∑r£_m±abÀ_bus
+(
+sys
+, (
+mp_èbÀ_íåy_bus
+*)
+mp_íåy
+);
+
+231 
+MP_TAB_TYPE_LINT
+:
+
+232 
+	`∑r£_m±abÀ_löt
+(
+sys
+, (
+mp_èbÀ_íåy_löt
+*)
+mp_íåy
+);
+
+235 
+	`SMP_ERROR
+("U√x≥˘ed MP TabÀ E¡ry (ty≥=%d)\n", 
+ty≥
+);
+
+239 
+mp_íåy
+ +
+mp_íåy_Àngths
+[
+ty≥
+];
+
+243 
+	}
+}
+
+246 
+mp_Êﬂt_±r_°ru˘
+*
+
+247 
+	$föd_mp_poöãr
+ ()
+
+249 * 
+curs‹
+ = (*)
+BASE_MEM_LAST_KILO
+;
+
+255 
+curs‹
+ <(*)(
+BASE_MEM_LAST_KILO
++
+PAGE_SIZE
+)) {
+
+257 i‡(
+	`°∫cmp
+(
+curs‹
+, "_MP_", 4) == 0) {
+
+258  (
+mp_Êﬂt_±r_°ru˘
+*)
+curs‹
+;
+
+261 
+curs‹
+ += 4;
+
+264 
+curs‹
+ = (*)
+BIOS_ROM_BASE
+;
+
+266 
+curs‹
+ <(*)
+BIOS_ROM_END
+) {
+
+268 i‡(
+	`°∫cmp
+(
+curs‹
+, "_MP_", 4) == 0) {
+
+269  (
+mp_Êﬂt_±r_°ru˘
+*)
+curs‹
+;
+
+272 
+curs‹
+ += 4;
+
+275 
+	}
+}
+
+279 
+	$__óæy_öô_mp
+ (
+«ut_öfo
+ * 
+«ut
+)
+
+281 
+mp_Êﬂt_±r_°ru˘
+ * 
+mp_±r
+;
+
+283 
+mp_±r
+ = 
+	`föd_mp_poöãr
+();
+
+285 i‡(!
+mp_±r
+) {
+
+286 
+	`SMP_ERROR
+("CouldÇot find MP floatingÖointer struct\n");
+
+290 
+«ut
+->
+sys
+.
+pic_mode_íabÀd
+ = !!(
+mp_±r
+->
+mp_„©2
+ & 
+PIC_MODE_ON
+);
+
+292 
+	`SMP_PRINT
+("Verifying MP Floating Ptr Struct integrity...");
+
+293 i‡(!
+	`blk_cksum_ok
+((
+uöt8_t
+*)
+mp_±r
+, 16)) {
+
+294 
+	`¥ötk
+("FAIL\n");
+
+295 
+	`SMP_ERROR
+("Corrupt MP Floating Ptr Struct detected\n");
+
+298 
+	`¥ötk
+("OK\n");
+
+301 
+	`∑r£_mp_èbÀ
+(&(
+«ut
+->
+sys
+), (
+mp_èbÀ
+*)(
+uöt64_t
+)
+mp_±r
+->
+mp_cfg_±r
+);
+
+304 
+	}
+}
+
+308 
+	$a˝i_∑r£_œpic
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+309 c⁄° 
+íd
+)
+
+311 
+a˝i_madt_loˇl_≠ic
+ *
+p
+ =
+
+312 (
+a˝i_madt_loˇl_≠ic
+ *)
+hdr
+;
+
+313 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+314 
+˝u
+ * 
+√w_˝u
+ = 
+NULL
+;
+
+317 i‡(!(
+p
+->
+œpic_Êags
+ & 
+ACPI_MADT_ENABLED
+)) {
+
+318 
+	`SMP_DEBUG
+("[ ACPI Disabled CPU ] (skipping)\n");
+
+322 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+323 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+326 i‡(
+sys
+->
+num_˝us
+ =
+NAUT_CONFIG_MAX_CPUS
+) {
+
+327 
+	`∑nic
+("CPU countÉxceeded max (check your .config)\n");
+
+330 i‡(!(
+√w_˝u
+ = 
+	`mm_boŸ_Æloc
+((
+˝u
+)))) {
+
+331 
+	`∑nic
+("Couldn'tállocate CPU struct\n");
+
+333 
+	`mem£t
+(
+√w_˝u
+, 0, (
+˝u
+));
+
+335 
+√w_˝u
+->
+id
+ = 
+sys
+->
+num_˝us
+;
+
+336 
+√w_˝u
+->
+œpic_id
+ = 
+p
+->
+id
+;
+
+337 
+√w_˝u
+->
+íabÀd
+ = 1;
+
+338 
+√w_˝u
+->
+˝u_sig
+ = 0;
+
+339 
+√w_˝u
+->
+„©_Êags
+ = 0;
+
+340 
+√w_˝u
+->
+sy°em
+ = 
+sys
+;
+
+341 
+√w_˝u
+->
+˝u_khz
+ = 
+	`nk_dëe˘_˝u_‰eq
+“ew_˝u->
+id
+);
+
+342 
+√w_˝u
+->
+is_b•
+ = (
+p
+->
+id
+ == 0 ? 1 : 0);
+
+344 
+	`•ölock_öô
+(&
+√w_˝u
+->
+lock
+);
+
+346 
+sys
+->
+˝us
+[sys->
+num_˝us
+] = 
+√w_˝u
+;
+
+348 
+sys
+->
+num_˝us
+++;
+
+351 
+	}
+}
+
+353 
+	$a˝i_∑r£_loˇl_x2≠ic
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+354 c⁄° 
+íd
+)
+
+356 
+a˝i_madt_loˇl_x2≠ic
+ *
+p
+ =
+
+357 (
+a˝i_madt_loˇl_x2≠ic
+ *)
+hdr
+;
+
+358 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+359 
+˝u
+ * 
+√w_˝u
+ = 
+NULL
+;
+
+362 i‡(!(
+p
+->
+œpic_Êags
+ & 
+ACPI_MADT_ENABLED
+)) {
+
+363 
+	`SMP_DEBUG
+("[ ACPI Disabled CPU (X2APIC) ] (skipping)\n");
+
+367 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+368 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+371 i‡(
+sys
+->
+num_˝us
+ =
+NAUT_CONFIG_MAX_CPUS
+) {
+
+372 
+	`∑nic
+("CPU countÉxceeded max (check your .config)\n");
+
+375 i‡(!(
+√w_˝u
+ = 
+	`mm_boŸ_Æloc
+((
+˝u
+)))) {
+
+376 
+	`∑nic
+("Couldn'tállocate CPU struct\n");
+
+379 
+	`mem£t
+(
+√w_˝u
+, 0, (
+˝u
+));
+
+381 
+√w_˝u
+->
+id
+ = 
+sys
+->
+num_˝us
+;
+
+382 
+√w_˝u
+->
+œpic_id
+ = 
+p
+->
+loˇl_≠ic_id
+;
+
+383 
+√w_˝u
+->
+íabÀd
+ = 1;
+
+384 
+√w_˝u
+->
+˝u_sig
+ = 0;
+
+385 
+√w_˝u
+->
+„©_Êags
+ = 0;
+
+386 
+√w_˝u
+->
+sy°em
+ = 
+sys
+;
+
+387 
+√w_˝u
+->
+˝u_khz
+ = 
+	`nk_dëe˘_˝u_‰eq
+“ew_˝u->
+id
+);
+
+388 
+√w_˝u
+->
+is_b•
+ = 0;
+
+390 
+	`•ölock_öô
+(&
+√w_˝u
+->
+lock
+);
+
+392 
+sys
+->
+˝us
+[sys->
+num_˝us
+] = 
+√w_˝u
+;
+
+394 
+sys
+->
+num_˝us
+++;
+
+397 
+	}
+}
+
+399 
+	$a˝i_∑r£_öãºu±_ovîride
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+400 c⁄° 
+íd
+)
+
+402 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+403 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+406 
+	}
+}
+
+408 
+	$a˝i_∑r£_nmi_sour˚
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+409 c⁄° 
+íd
+)
+
+411 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+412 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+415 
+	}
+}
+
+417 
+	$a˝i_∑r£_loˇl_≠ic_nmi
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+418 c⁄° 
+íd
+)
+
+420 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+421 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+424 
+	}
+}
+
+426 
+	$a˝i_∑r£_loˇl_≠ic_ovîride
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+427 c⁄° 
+íd
+)
+
+429 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+430 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+433 
+	}
+}
+
+435 
+	$a˝i_∑r£_io_ßpic
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+436 c⁄° 
+íd
+)
+
+438 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+439 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+442 
+	}
+}
+
+444 
+	$a˝i_∑r£_loˇl_ßpic
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+445 c⁄° 
+íd
+)
+
+447 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+448 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+451 
+	}
+}
+
+453 
+	$a˝i_∑r£_öãºu±_sour˚
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+454 c⁄° 
+íd
+)
+
+456 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+457 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+460 
+	}
+}
+
+462 
+	$a˝i_∑r£_loˇl_x2≠ic_nmi
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+463 c⁄° 
+íd
+)
+
+465 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+466 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+469 
+	}
+}
+
+471 
+	$a˝i_∑r£_madt_ª£rved
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+472 c⁄° 
+íd
+)
+
+474 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+475 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+478 
+	}
+}
+
+484 
+	$a˝i_∑r£_löt
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+485 c⁄° 
+íd
+)
+
+488 
+	}
+}
+
+492 
+	$a˝i_∑r£_iﬂpic
+ (
+a˝i_subèbÀ_hódî
+ * 
+hdr
+,
+
+493 c⁄° 
+íd
+)
+
+495 
+a˝i_madt_io_≠ic
+ *
+p
+ =
+
+496 (
+a˝i_madt_io_≠ic
+ *)
+hdr
+;
+
+497 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+498 
+iﬂpic
+ * 
+iﬂ
+ = 
+NULL
+;
+
+500 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+501 
+	`a˝i_èbÀ_¥öt_madt_íåy
+(
+hdr
+);
+
+504 i‡(
+sys
+->
+num_iﬂpics
+ =
+NAUT_CONFIG_MAX_IOAPICS
+) {
+
+505 
+	`∑nic
+("IOAPIC countÉxceeded max (change it in .config\n");
+
+508 i‡(!(
+iﬂ
+ = 
+	`mm_boŸ_Æloc
+((
+iﬂpic
+)))) {
+
+509 
+	`∑nic
+("Couldn'tállocate IOAPIC struct\n");
+
+511 
+	`mem£t
+(
+iﬂ
+, 0, (
+iﬂpic
+));
+
+514 
+iﬂ
+->
+id
+ = 
+p
+->id;
+
+515 
+iﬂ
+->
+vîsi⁄
+ = 0;
+
+516 
+iﬂ
+->
+ußbÀ
+ = 1;
+
+517 
+iﬂ
+->
+ba£
+ = 
+p
+->
+addªss
+;
+
+519 
+sys
+->
+iﬂpics
+[sys->
+num_iﬂpics
+] = 
+iﬂ
+;
+
+520 
+sys
+->
+num_iﬂpics
+++;
+
+523 
+	}
+}
+
+528 
+	$a˝i_èbÀ_∑r£_madt
+ (
+a˝i_madt_ty≥
+ 
+id
+,
+
+529 
+a˝i_èbÀ_íåy_h™dÀr
+ 
+h™dÀr
+,
+
+530 
+max_íåõs
+)
+
+532  (
+	`a˝i_èbÀ_∑r£_íåõs
+(
+ACPI_SIG_MADT
+,
+
+533 (
+a˝i_èbÀ_madt
+),
+
+534 
+id
+,
+
+535 
+h™dÀr
+,
+
+536 
+max_íåõs
+) < 0);
+
+537 
+	}
+}
+
+541 
+	$a˝i_∑r£_madt
+ (
+a˝i_èbÀ_hódî
+ * 
+hdr
+, * 
+¨g
+)
+
+543 
+a˝i_èbÀ_madt
+ *
+p
+ = (a˝i_èbÀ_madà*)
+hdr
+;
+
+544 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+545 
+pˇt
+ = 
+p
+->
+Êags
+ & 
+ACPI_MADT_PCAT_COMPAT
+;
+
+547 
+	`SMP_DEBUG
+("Parsing MADT...\n");
+
+548 
+	`SMP_DEBUG
+("flags=%x (PCAT_COMPAT=%d (%s))\n",
+
+549 
+p
+->
+Êags
+, 
+pˇt
+,Öcat ? "Dual PIC" : "Multiple APIC");
+
+551 i‡(
+pˇt
+) {
+
+552 
+sys
+->
+Êags
+ |
+NK_SYS_LEGACY
+;
+
+556 
+	}
+}
+
+560 
+	$__óæy_öô_madt
+ (
+«ut_öfo
+ * 
+«ut
+)
+
+562 i‡(
+	`a˝i_èbÀ_∑r£
+(
+ACPI_SIG_MADT
+, 
+a˝i_∑r£_madt
+, 
+NULL
+) != 0) {
+
+563 
+	`SMP_ERROR
+("CouldÇotÖarse MADT\n");
+
+568 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_APIC
+,
+
+569 
+a˝i_∑r£_œpic
+,
+
+570 
+NAUT_CONFIG_MAX_CPUS
+) != 0) {
+
+571 
+	`SMP_ERROR
+("UnableÅoÖarse MADT LAPICÉntries\n");
+
+579 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_X2APIC
+,
+
+580 
+a˝i_∑r£_loˇl_x2≠ic
+,
+
+581 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+582 
+	`SMP_ERROR
+("UnableÅoÖarse MADT X2APICÉntries\n");
+
+587 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_IO_APIC
+,
+
+588 
+a˝i_∑r£_iﬂpic
+,
+
+589 
+NAUT_CONFIG_MAX_IOAPICS
+) != 0) {
+
+590 
+	`SMP_ERROR
+("UnableÅoÖarse MADT IOAPICÉntries\n");
+
+594 #ifde‡
+NAUT_CONFIG_DEBUG_SMP
+
+
+597 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_INTERRUPT_SOURCE
+,
+
+598 
+a˝i_∑r£_öãºu±_sour˚
+,
+
+599 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+600 
+	`SMP_ERROR
+("UnableÅoÖarse interrupt sources\n");
+
+604 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_INTERRUPT_OVERRIDE
+,
+
+605 
+a˝i_∑r£_öãºu±_ovîride
+,
+
+606 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+607 
+	`SMP_ERROR
+("UnableÅoÖarse interrupt overrides\n");
+
+611 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_NMI_SOURCE
+,
+
+612 
+a˝i_∑r£_öãºu±_sour˚
+,
+
+613 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+614 
+	`SMP_ERROR
+("UnableÅoÖarse NMI sources\n");
+
+618 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_APIC_NMI
+,
+
+619 
+a˝i_∑r£_loˇl_≠ic_nmi
+,
+
+620 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+621 
+	`SMP_ERROR
+("UnableÅoÖarseÜocalápicÇmi information\n");
+
+625 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_APIC_OVERRIDE
+,
+
+626 
+a˝i_∑r£_loˇl_≠ic_ovîride
+,
+
+627 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+628 
+	`SMP_ERROR
+("UnableÅoÖarseÜocalápic overrides\n");
+
+632 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_IO_SAPIC
+,
+
+633 
+a˝i_∑r£_io_ßpic
+,
+
+634 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+635 
+	`SMP_ERROR
+("UnableÅoÖarse IO SAPICS\n");
+
+639 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_SAPIC
+,
+
+640 
+a˝i_∑r£_loˇl_ßpic
+,
+
+641 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+642 
+	`SMP_ERROR
+("UnableÅoÖarseÜocal SAPICS\n");
+
+647 i‡(
+	`a˝i_èbÀ_∑r£_madt
+(
+ACPI_MADT_TYPE_LOCAL_X2APIC_NMI
+,
+
+648 
+a˝i_∑r£_loˇl_x2≠ic_nmi
+,
+
+649 
+NAUT_CONFIG_MAX_CPUS
+)) {
+
+650 
+	`SMP_ERROR
+("UnableÅoÖarseÜocal X2APIC NMIs\n");
+
+657 
+	}
+}
+
+661 
+	$a˝i_èbÀ_∑r£_Ádt
+ (
+a˝i_madt_ty≥
+ 
+id
+,
+
+662 
+a˝i_èbÀ_íåy_h™dÀr
+ 
+h™dÀr
+,
+
+663 
+max_íåõs
+)
+
+666  (
+	`a˝i_èbÀ_∑r£_íåõs
+(
+ACPI_SIG_FADT
+,
+
+667 (
+a˝i_èbÀ_Ádt
+),
+
+668 
+id
+,
+
+669 
+h™dÀr
+,
+
+670 
+max_íåõs
+) < 0);
+
+671 
+	}
+}
+
+674 
+	$a˝i_∑r£_Ádt
+(
+a˝i_èbÀ_hódî
+ * 
+hdr
+, * 
+¨g
+)
+
+676 
+a˝i_èbÀ_Ádt
+ *
+p
+ = (a˝i_èbÀ_Ádà*)
+hdr
+;
+
+677 
+sys_öfo
+ * 
+sys
+ = &(
+	`nk_gë_«utûus_öfo
+()->sys);
+
+678 
+Àgacy
+=0;
+
+679 
+i8042
+=0;
+
+680 
+novga
+=0;
+
+681 
+nomsi
+=0;
+
+683 
+	`SMP_DEBUG
+("Parsing FADT...\n");
+
+684 
+	`SMP_DEBUG
+("sy°em i¡îru± modñ: %x\n",
+p
+->
+modñ
+);
+
+685 
+	`SMP_DEBUG
+("boŸ_Êags: %x\n",
+p
+->
+boŸ_Êags
+);
+
+687 
+Àgacy
+ = 
+p
+->
+boŸ_Êags
+ & 
+ACPI_FADT_LEGACY_DEVICES
+;
+
+688 
+i8042
+ = 
+p
+->
+boŸ_Êags
+ & 
+ACPI_FADT_8042
+;
+
+689 
+novga
+ = 
+p
+->
+boŸ_Êags
+ & 
+ACPI_FADT_NO_VGA
+;
+
+690 
+nomsi
+ = 
+p
+->
+boŸ_Êags
+ & 
+ACPI_FADT_NO_MSI
+;
+
+692 
+	`SMP_DEBUG
+("flagsáre:Üegacy=%d i8042=%dÇovga=%dÇomsi=%d\n",
+
+693 
+Àgacy
+,
+i8042
+,
+novga
+,
+nomsi
+);
+
+695 i‡(
+Àgacy
+) {
+
+696 
+sys
+->
+Êags
+ |
+NK_SYS_LEGACY
+;
+
+700 
+	}
+}
+
+702 
+	$__óæy_öô_Ádt_Àgacy
+(
+«ut_öfo
+ * 
+«ut
+)
+
+704 i‡(
+	`a˝i_èbÀ_∑r£
+(
+ACPI_SIG_FADT
+, 
+a˝i_∑r£_Ádt
+, 
+NULL
+) != 0) {
+
+705 
+	`SMP_ERROR
+("CouldÇotÖarse FADT\n");
+
+710 
+	}
+}
+
+714 
+	$__a˝i_c⁄figuª_Àgacy
+(
+«ut_öfo
+ * 
+«ut
+)
+
+718 
+uöt32_t
+ 
+iﬂpic_id
+;
+
+719 i‡(
+«ut
+->
+sys
+.
+num_iﬂpics
+<1) {
+
+720 
+	`SMP_ERROR
+("No IOAPICs!\n");
+
+725 
+iﬂpic_id
+ = 
+«ut
+->
+sys
+.
+iﬂpics
+[0]->
+id
+;
+
+727 
+	`SMP_DEBUG
+("C⁄figurögÜegacy ISA bu†0 wôhÜegacy ISA devi˚ IRQ†0..15 ch™√ÀdÅÿfú° iﬂpi¯(id 0x%xËöÅhêMPS≥¯m™√r\n",
+iﬂpic_id
+);
+
+734 
+	`nk_add_bus_íåy
+(0,"ISA");
+
+735 
+	`nk_add_öt_íåy
+(0,
+
+741 
+iﬂpic_id
+
+
+744 
+	`nk_add_öt_íåy
+(0,0,0,0,1,1,
+iﬂpic_id
+);
+
+746 
+	`nk_add_öt_íåy
+(0,0,0,0,3,3,
+iﬂpic_id
+);
+
+747 
+	`nk_add_öt_íåy
+(0,0,0,0,4,4,
+iﬂpic_id
+);
+
+748 
+	`nk_add_öt_íåy
+(0,0,0,0,5,5,
+iﬂpic_id
+);
+
+749 
+	`nk_add_öt_íåy
+(0,0,0,0,6,6,
+iﬂpic_id
+);
+
+750 
+	`nk_add_öt_íåy
+(0,0,0,0,7,7,
+iﬂpic_id
+);
+
+751 
+	`nk_add_öt_íåy
+(0,0,0,0,8,8,
+iﬂpic_id
+);
+
+753 
+	`nk_add_öt_íåy
+(0,0,0,0,10,10,
+iﬂpic_id
+);
+
+754 
+	`nk_add_öt_íåy
+(0,0,0,0,11,11,
+iﬂpic_id
+);
+
+755 
+	`nk_add_öt_íåy
+(0,0,0,0,12,12,
+iﬂpic_id
+);
+
+756 
+	`nk_add_öt_íåy
+(0,0,0,0,13,13,
+iﬂpic_id
+);
+
+757 
+	`nk_add_öt_íåy
+(0,0,0,0,14,14,
+iﬂpic_id
+);
+
+758 
+	`nk_add_öt_íåy
+(0,0,0,0,15,15,
+iﬂpic_id
+);
+
+760 
+	`SMP_DEBUG
+("Legacy configuration finished\n");
+
+763 
+	}
+}
+
+767 
+	$¨ch_óæy_öô
+ (
+«ut_öfo
+ * 
+«ut
+)
+
+769 
+ªt
+;
+
+771 
+	`SMP_DEBUG
+("Checking for MADT\n");
+
+776 i‡(
+	`__óæy_öô_madt
+(
+«ut
+) == 0) {
+
+777 
+	`SMP_DEBUG
+("MADT init succeeded -Çowálso checking forÜegacy system via FADT\n");
+
+778 
+	`__óæy_öô_Ádt_Àgacy
+(
+«ut
+);
+
+780 i‡(
+«ut
+->
+sys
+.
+Êags
+ & 
+NK_SYS_LEGACY
+) {
+
+781 
+	`SMP_DEBUG
+("ACPI system withÜegacy - configuring\n");
+
+782 i‡(
+	`__a˝i_c⁄figuª_Àgacy
+(
+«ut
+)) {
+
+783 
+	`∑nic
+("Cannot configure ACPI system withÜegacy\n");
+
+786 
+out_ok
+;
+
+788 
+	`SMP_DEBUG
+("MADTÇotÖresent or working. Falling back on MP Table\n");
+
+789 i‡(
+	`__óæy_öô_mp
+(
+«ut
+) == 0) {
+
+790 
+out_ok
+;
+
+792 
+	`∑nic
+("Neither ACPI MADTÇor MP TableÖresent/working! Cannot detect CPUs. Giving up.\n");
+
+796 
+out_ok
+:
+
+797 
+	`SMP_PRINT
+("Dëe˘ed %u CPUs\n", 
+«ut
+->
+sys
+.
+num_˝us
+);
+
+799 
+	}
+}
+
+	@
+1
+.
+1
+/usr/include
+7
+58
+early_mem.c
+init.c
+main.c
+mwait.c
+numa.c
+shutdown.c
+smp.c

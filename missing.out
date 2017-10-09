@@ -1,0 +1,227 @@
+/home/parallels/nautilus_newlib/newlib//x86_64-pc-nautilus/lib/libc.a(spinlock.o): In function `my_spin_lock':
+/home/parallels/nautilus_newlib/newlib/build/x86_64-pc-nautilus/newlib/libc/sys/nautilus/../../../../../../src/newlib/libc/sys/nautilus/spinlock.c:67: undefined reference to `spin_lock'
+/home/parallels/nautilus_newlib/newlib//x86_64-pc-nautilus/lib/libc.a(spinlock.o): In function `my_spin_try_lock':
+/home/parallels/nautilus_newlib/newlib/build/x86_64-pc-nautilus/newlib/libc/sys/nautilus/../../../../../../src/newlib/libc/sys/nautilus/spinlock.c:72: undefined reference to `spin_try_lock'
+/home/parallels/nautilus_newlib/newlib//x86_64-pc-nautilus/lib/libc.a(spinlock.o): In function `my_spin_lock_irq_save':
+/home/parallels/nautilus_newlib/newlib/build/x86_64-pc-nautilus/newlib/libc/sys/nautilus/../../../../../../src/newlib/libc/sys/nautilus/spinlock.c:77: undefined reference to `spin_lock_irq_save'
+/home/parallels/nautilus_newlib/newlib//x86_64-pc-nautilus/lib/libc.a(spinlock.o): In function `my_spin_unlock':
+/home/parallels/nautilus_newlib/newlib/build/x86_64-pc-nautilus/newlib/libc/sys/nautilus/../../../../../../src/newlib/libc/sys/nautilus/spinlock.c:92: undefined reference to `spin_unlock'
+/home/parallels/nautilus_newlib/newlib//x86_64-pc-nautilus/lib/libc.a(spinlock.o): In function `my_spin_unlock_irq_restore':
+/home/parallels/nautilus_newlib/newlib/build/x86_64-pc-nautilus/newlib/libc/sys/nautilus/../../../../../../src/newlib/libc/sys/nautilus/spinlock.c:97: undefined reference to `spin_unlock_irq_restore'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `remove_files':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1055: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `snprintf':
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:64: undefined reference to `__snprintf_chk'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `remove_files':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1064: undefined reference to `__stack_chk_fail'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_fill_buffer':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1989: undefined reference to `sb_rng_state'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_wait':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1245: undefined reference to `io_getevents'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1250: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1287: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1275: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1264: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_report_cumulative':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:837: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_report_intermediate':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:821: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_submit_or_wait':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1212: undefined reference to `io_submit'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1203: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1214: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_print_mode':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:768: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:769: undefined reference to `sb_print_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:769: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:771: undefined reference to `sb_print_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:771: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:774: undefined reference to `sb_print_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:774: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:777: undefined reference to `sb_print_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:777: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:797: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:807: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:809: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:812: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:786: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:788: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:810: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:805: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o):/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:802: more undefined references to `log_text' follow
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_print_mode':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:813: undefined reference to `__stack_chk_fail'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `convert_extra_flags':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:949: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:365: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `snprintf':
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:64: undefined reference to `__snprintf_chk'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:360: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:369: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:370: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `sb_get_allocation_granularity':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1916: undefined reference to `sb_getpagesize'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_mmap_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: undefined reference to `ftruncate'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: undefined reference to `ftruncate'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: undefined reference to `ftruncate'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: undefined reference to `ftruncate'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: undefined reference to `ftruncate'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o):/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1342: more undefined references to `ftruncate' follow
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_mmap_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: undefined reference to `mmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: undefined reference to `mmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: undefined reference to `mmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: undefined reference to `mmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: undefined reference to `mmap'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o):/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1354: more undefined references to `mmap' follow
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_mmap_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1358: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1344: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_prepare':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:381: undefined reference to `__stack_chk_fail'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `create_files':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:970: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:973: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:974: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:979: undefined reference to `sb_timer_init'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `snprintf':
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:64: undefined reference to `__snprintf_chk'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `create_files':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1002: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1013: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1022: undefined reference to `fsync'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1041: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1000: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1004: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1032: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:989: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1036: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1044: undefined reference to `__stack_chk_fail'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `parse_arguments':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1691: undefined reference to `sb_get_value_int'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1698: undefined reference to `sb_get_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1707: undefined reference to `sb_get_value_string'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1710: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1737: undefined reference to `sb_get_value_string'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1768: undefined reference to `sb_get_value_int'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1776: undefined reference to `sb_get_value_size'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1789: undefined reference to `sb_get_value_string'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1695: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1701: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1804: undefined reference to `sb_get_value_int'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1812: undefined reference to `sb_get_value_flag'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1813: undefined reference to `sb_get_value_flag'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1820: undefined reference to `sb_get_value_string'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1838: undefined reference to `sb_get_value_double'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1845: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1846: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1848: undefined reference to `sb_getpagesize'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1848: undefined reference to `sb_memalign'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1851: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1771: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1807: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1834: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1779: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o):/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1714: more undefined references to `log_text' follow
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `parse_arguments':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1715: undefined reference to `sb_print_options'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1841: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1764: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1800: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1732: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_done':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:405: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:405: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_async_done':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1165: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1167: undefined reference to `io_queue_release'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1165: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_mmap_done':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: undefined reference to `munmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: undefined reference to `munmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: undefined reference to `munmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: undefined reference to `munmap'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: undefined reference to `munmap'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o):/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1382: more undefined references to `munmap' follow
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_execute_event':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:647: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:666: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:649: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:661: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:678: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:755: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:673: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:721: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `pread':
+/usr/include/x86_64-linux-gnu/bits/unistd.h:83: undefined reference to `pread'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_execute_event':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:685: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:715: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_pwrite':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1637: undefined reference to `pwrite'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_validate_buffer':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:2023: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:2024: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_execute_event':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:724: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:744: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_validate_buffer':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:2014: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:2016: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_execute_event':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:695: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `init_vars':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1105: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_init':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:339: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:340: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:327: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_async_init':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1125: undefined reference to `sb_get_value_int'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1132: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1134: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1136: undefined reference to `io_queue_init'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1138: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1127: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1146: undefined reference to `log_errno'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_get_rnd_request':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:553: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:553: undefined reference to `pthread_mutex_lock'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:616: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:616: undefined reference to `sb_rng_state'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:622: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:622: undefined reference to `sb_rng_state'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:637: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:637: undefined reference to `pthread_mutex_unlock'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:576: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:576: undefined reference to `pthread_mutex_unlock'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_get_seq_request':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:436: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:436: undefined reference to `pthread_mutex_lock'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:460: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:460: undefined reference to `pthread_mutex_unlock'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:520: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:526: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:526: undefined reference to `pthread_mutex_unlock'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_get_rnd_request':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:570: undefined reference to `sb_globals'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:570: undefined reference to `pthread_mutex_unlock'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `check_seq_req':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1876: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1893: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1894: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1896: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1884: undefined reference to `log_text'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1884: undefined reference to `sb_rng_state'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_report_cumulative':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:852: undefined reference to `sb_report_cumulative'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_report_intermediate':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:821: undefined reference to `log_timestamp'
+/home/parallels/sysbench/src/tests/fileio/libsbfileio.a(libsbfileio_a-sb_fileio.o): In function `file_fsync':
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1416: undefined reference to `fsync'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1424: undefined reference to `fdatasync'
+/home/parallels/sysbench/src/tests/fileio/sb_fileio.c:1448: undefined reference to `msync'
+make: *** [nautilus.bin] Error 1
